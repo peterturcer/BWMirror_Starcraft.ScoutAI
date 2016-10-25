@@ -1,58 +1,61 @@
-25.10.2016 21:49:41 5712 Logging started
-25.10.2016 21:49:41 5712 Begin Startup
-25.10.2016 21:49:41 5712 Chaosauncher 0.5.4.4 on NT 6.2.9200  at D:\Projects\School\Programming\BWMirror_Starcraft.ScoutAI\BWAPI\Chaoslauncher\Chaoslauncher.exe
-25.10.2016 21:49:41 5712 Load Settings
-25.10.2016 21:49:41 5712 GamePath: D:\Installs\Games_inst\Starcraft No Install\
-25.10.2016 21:49:41 5712 Load Plugins
-25.10.2016 21:49:41 5712 AdvLoaderPluginPath: \Plugins\
-25.10.2016 21:49:41 5712 Loading BWL4-Plugin D:\Projects\School\Programming\BWMirror_Starcraft.ScoutAI\BWAPI\Chaoslauncher\iccscbn.icc
-25.10.2016 21:49:41 5712 Plugin loaded ICCup
-25.10.2016 21:49:41 5712 Loading BWL4-Plugin D:\Projects\School\Programming\BWMirror_Starcraft.ScoutAI\BWAPI\Chaoslauncher\Plugins\APMAlert.bwl
-25.10.2016 21:49:41 5712 Plugin loaded APMAlert (1.16.1)
-25.10.2016 21:49:41 5712 Loading BWL4-Plugin D:\Projects\School\Programming\BWMirror_Starcraft.ScoutAI\BWAPI\Chaoslauncher\Plugins\BWAPI_PluginInjector.bwl
-25.10.2016 21:49:41 5712 Plugin loaded BWAPI 4.1.2 Injector [RELEASE]
-25.10.2016 21:49:41 5712 Loading BWL4-Plugin D:\Projects\School\Programming\BWMirror_Starcraft.ScoutAI\BWAPI\Chaoslauncher\Plugins\Chaosplugin.bwl
-25.10.2016 21:49:41 5712 Plugin loaded Chaosplugin for 1.16.1
-25.10.2016 21:49:41 5712 Loading BWL4-Plugin D:\Projects\School\Programming\BWMirror_Starcraft.ScoutAI\BWAPI\Chaoslauncher\Plugins\LatencyChanger.bwl
-25.10.2016 21:49:41 5712 Plugin loaded LatencyChanger for 1.16.1
-25.10.2016 21:49:41 5712 Loading BWL4-Plugin D:\Projects\School\Programming\BWMirror_Starcraft.ScoutAI\BWAPI\Chaoslauncher\Plugins\repfix.bwl
-25.10.2016 21:49:41 5712 Plugin loaded RepFix
-25.10.2016 21:49:41 5712 Loading BWL4-Plugin D:\Projects\School\Programming\BWMirror_Starcraft.ScoutAI\BWAPI\Chaoslauncher\Plugins\RWAPlayer.bwl
-25.10.2016 21:49:41 5712 Plugin loaded RWAPlayer (1.16.1)
-25.10.2016 21:49:41 5712 Loading BWL4-Plugin D:\Projects\School\Programming\BWMirror_Starcraft.ScoutAI\BWAPI\Chaoslauncher\Plugins\RWARecorder.bwl
-25.10.2016 21:49:41 5712 Plugin loaded RWARecorder (1.16.1)
-25.10.2016 21:49:41 5712 Loading BWL4-Plugin D:\Projects\School\Programming\BWMirror_Starcraft.ScoutAI\BWAPI\Chaoslauncher\Plugins\Stormplugin.bwl
-25.10.2016 21:49:41 5712 Plugin loaded Stormplugin for 1.16.1
-25.10.2016 21:49:41 5712 Loading BWL4-Plugin D:\Projects\School\Programming\BWMirror_Starcraft.ScoutAI\BWAPI\Chaoslauncher\Plugins\wmode.bwl
-25.10.2016 21:49:41 5712 Plugin loaded W-MODE 1.02
-25.10.2016 21:49:41 5712 Load Tools
-25.10.2016 21:49:41 5712 Init GUI
-25.10.2016 21:49:41 5712 Get Starcraftversions
-25.10.2016 21:49:41 5712 Init complete
-25.10.2016 21:49:46 5712 Startbutton
-25.10.2016 21:49:46 5712 Starting Game Starcraft 1.16.1 D:\Installs\Games_inst\Starcraft No Install\StarCraft.exe
-25.10.2016 21:49:46 5712 BWAPI 4.1.2 Injector [RELEASE] Version  Compatible
-25.10.2016 21:49:46 5712 W-MODE 1.02 Version 1.0.2 Compatible
-25.10.2016 21:49:46 5712 Obtained DebugPrivilege
-25.10.2016 21:49:46 5712 CreateProcess
-25.10.2016 21:49:46 5712 Call ScSuspended for all active Plugins
-25.10.2016 21:49:46 5712 ApplyPatchSuspended for BWAPI 4.1.2 Injector [RELEASE]
-25.10.2016 21:49:46 5712 ApplyPatchSuspended for W-MODE 1.02
-25.10.2016 21:49:46 5712 ResumeThread
-25.10.2016 21:49:46 5712 WaitForInputIdle
-25.10.2016 21:49:46 5712 Call ScWindowCreated for all active Plugins
-25.10.2016 21:49:46 5712 ApplyPatch for BWAPI 4.1.2 Injector [RELEASE]
-25.10.2016 21:49:46 5712 ApplyPatch for W-MODE 1.02
-25.10.2016 21:49:46 5712 Starting Starcraft completed
-25.10.2016 21:49:51 5712 Finishing
-25.10.2016 21:49:51 5712 Unloading Plugin ICCup
-25.10.2016 21:49:51 5712 Unloading Plugin APMAlert (1.16.1)
-25.10.2016 21:49:51 5712 Unloading Plugin BWAPI 4.1.2 Injector [RELEASE]
-25.10.2016 21:49:51 5712 Unloading Plugin Chaosplugin for 1.16.1
-25.10.2016 21:49:51 5712 Unloading Plugin LatencyChanger for 1.16.1
-25.10.2016 21:49:51 5712 Unloading Plugin RepFix
-25.10.2016 21:49:51 5712 Unloading Plugin RWAPlayer (1.16.1)
-25.10.2016 21:49:51 5712 Unloading Plugin RWARecorder (1.16.1)
-25.10.2016 21:49:51 5712 Unloading Plugin Stormplugin for 1.16.1
-25.10.2016 21:49:51 5712 Unloading Plugin W-MODE 1.02
-25.10.2016 21:49:51 5712 Logging ended
+25.10.2016 22:28:00 5696 Logging started
+25.10.2016 22:28:00 5696 Begin Startup
+25.10.2016 22:28:00 5696 Chaosauncher 0.5.4.4 on NT 6.1.7600  at D:\PROJECTS\JAVA\BWMirror_Starcraft.ScoutAI\BWAPI\Chaoslauncher\Chaoslauncher.exe
+25.10.2016 22:28:00 5696 Load Settings
+25.10.2016 22:28:00 5696 GamePath: D:\Games\Starcraft No Install\
+25.10.2016 22:28:00 5696 Load Plugins
+25.10.2016 22:28:00 5696 AdvLoaderPluginPath: \Plugins\
+25.10.2016 22:28:00 5696 Loading BWL4-Plugin D:\PROJECTS\JAVA\BWMirror_Starcraft.ScoutAI\BWAPI\Chaoslauncher\iccscbn.icc
+25.10.2016 22:28:00 5696 Plugin loaded ICCup
+25.10.2016 22:28:00 5696 Loading BWL4-Plugin D:\PROJECTS\JAVA\BWMirror_Starcraft.ScoutAI\BWAPI\Chaoslauncher\Plugins\APMAlert.bwl
+25.10.2016 22:28:00 5696 Plugin loaded APMAlert (1.16.1)
+25.10.2016 22:28:00 5696 Loading BWL4-Plugin D:\PROJECTS\JAVA\BWMirror_Starcraft.ScoutAI\BWAPI\Chaoslauncher\Plugins\BWAPI_PluginInjector.bwl
+25.10.2016 22:28:00 5696 Plugin loaded BWAPI 4.1.2 Injector [RELEASE]
+25.10.2016 22:28:00 5696 Loading BWL4-Plugin D:\PROJECTS\JAVA\BWMirror_Starcraft.ScoutAI\BWAPI\Chaoslauncher\Plugins\BWAPI_PluginInjectord.bwl
+25.10.2016 22:28:00 5696 Plugin loaded BWAPI 4.1.2 Injector [DEBUG]
+25.10.2016 22:28:00 5696 Loading BWL4-Plugin D:\PROJECTS\JAVA\BWMirror_Starcraft.ScoutAI\BWAPI\Chaoslauncher\Plugins\Chaosplugin.bwl
+25.10.2016 22:28:00 5696 Plugin loaded Chaosplugin for 1.16.1
+25.10.2016 22:28:00 5696 Loading BWL4-Plugin D:\PROJECTS\JAVA\BWMirror_Starcraft.ScoutAI\BWAPI\Chaoslauncher\Plugins\LatencyChanger.bwl
+25.10.2016 22:28:00 5696 Plugin loaded LatencyChanger for 1.16.1
+25.10.2016 22:28:00 5696 Loading BWL4-Plugin D:\PROJECTS\JAVA\BWMirror_Starcraft.ScoutAI\BWAPI\Chaoslauncher\Plugins\repfix.bwl
+25.10.2016 22:28:00 5696 Plugin loaded RepFix
+25.10.2016 22:28:00 5696 Loading BWL4-Plugin D:\PROJECTS\JAVA\BWMirror_Starcraft.ScoutAI\BWAPI\Chaoslauncher\Plugins\RWAPlayer.bwl
+25.10.2016 22:28:00 5696 Plugin loaded RWAPlayer (1.16.1)
+25.10.2016 22:28:00 5696 Loading BWL4-Plugin D:\PROJECTS\JAVA\BWMirror_Starcraft.ScoutAI\BWAPI\Chaoslauncher\Plugins\RWARecorder.bwl
+25.10.2016 22:28:00 5696 Plugin loaded RWARecorder (1.16.1)
+25.10.2016 22:28:00 5696 Loading BWL4-Plugin D:\PROJECTS\JAVA\BWMirror_Starcraft.ScoutAI\BWAPI\Chaoslauncher\Plugins\Stormplugin.bwl
+25.10.2016 22:28:00 5696 Plugin loaded Stormplugin for 1.16.1
+25.10.2016 22:28:00 5696 Loading BWL4-Plugin D:\PROJECTS\JAVA\BWMirror_Starcraft.ScoutAI\BWAPI\Chaoslauncher\Plugins\wmode.bwl
+25.10.2016 22:28:00 5696 Plugin loaded W-MODE 1.02
+25.10.2016 22:28:00 5696 Load Tools
+25.10.2016 22:28:00 5696 Init GUI
+25.10.2016 22:28:00 5696 Get Starcraftversions
+25.10.2016 22:28:00 5696 Init complete
+25.10.2016 22:28:02 5696 Startbutton
+25.10.2016 22:28:02 5696 Starting Game Starcraft 1.16.1 D:\Games\Starcraft No Install\StarCraft.exe
+25.10.2016 22:28:02 5696 BWAPI 4.1.2 Injector [RELEASE] Version  Compatible
+25.10.2016 22:28:02 5696 W-MODE 1.02 Version 1.0.2 Compatible
+25.10.2016 22:28:02 5696 Obtained DebugPrivilege
+25.10.2016 22:28:02 5696 CreateProcess
+25.10.2016 22:28:02 5696 Call ScSuspended for all active Plugins
+25.10.2016 22:28:02 5696 ApplyPatchSuspended for BWAPI 4.1.2 Injector [RELEASE]
+25.10.2016 22:28:02 5696 ApplyPatchSuspended for W-MODE 1.02
+25.10.2016 22:28:02 5696 ResumeThread
+25.10.2016 22:28:02 5696 WaitForInputIdle
+25.10.2016 22:28:02 5696 Call ScWindowCreated for all active Plugins
+25.10.2016 22:28:02 5696 ApplyPatch for BWAPI 4.1.2 Injector [RELEASE]
+25.10.2016 22:28:02 5696 ApplyPatch for W-MODE 1.02
+25.10.2016 22:28:02 5696 Starting Starcraft completed
+25.10.2016 22:28:09 5696 Finishing
+25.10.2016 22:28:09 5696 Unloading Plugin ICCup
+25.10.2016 22:28:09 5696 Unloading Plugin APMAlert (1.16.1)
+25.10.2016 22:28:09 5696 Unloading Plugin BWAPI 4.1.2 Injector [RELEASE]
+25.10.2016 22:28:09 5696 Unloading Plugin BWAPI 4.1.2 Injector [DEBUG]
+25.10.2016 22:28:09 5696 Unloading Plugin Chaosplugin for 1.16.1
+25.10.2016 22:28:09 5696 Unloading Plugin LatencyChanger for 1.16.1
+25.10.2016 22:28:09 5696 Unloading Plugin RepFix
+25.10.2016 22:28:09 5696 Unloading Plugin RWAPlayer (1.16.1)
+25.10.2016 22:28:09 5696 Unloading Plugin RWARecorder (1.16.1)
+25.10.2016 22:28:09 5696 Unloading Plugin Stormplugin for 1.16.1
+25.10.2016 22:28:09 5696 Unloading Plugin W-MODE 1.02
+25.10.2016 22:28:09 5696 Logging ended
