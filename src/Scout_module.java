@@ -9,6 +9,7 @@ import java.util.Random;
  */
 public class Scout_module {
 
+    //Test public
     public void helloWorld(Game pGame) {
         Random rnd=new Random();
         int x;
