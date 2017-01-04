@@ -110,8 +110,12 @@ public class Block {
     }
 
     /* ------------------- Drawing methods ------------------- */
-//ToDo: vykreslenie stvorca
-    public void drawBlock(Color color, Game pGame) {
+    public void drawBlock(Color pColor, Game pGame) {
+
+        pGame.drawDotMap(position,pColor);
+        pGame.drawBoxMap((int)(position.getX() - (radius / 2)),(int)(position.getY() - (radius / 2)),(int)(position.getX() + (radius / 2)),(int)(position.getY() + (radius / 2)),pColor);
+        pGame.drawTextMap(position.getX()-2,position.getY()-8,String.format("%.0f", damage));
+
 //        graphicsEx.setColor(color);
 //        graphicsEx.drawDotALTERNATIVE(new Vector2D(position.getPX(), position.getPY()));
 //        graphicsEx.drawBoxALTERNATIVE(new Vector2D((float) (position.getPX() - (radius / 2)), (float) (position.getPY() - (radius / 2))), new Vector2D((float) (position.getPX() + (radius / 2)), (float) (position.getPY() + (radius / 2))));
