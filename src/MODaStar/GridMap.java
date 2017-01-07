@@ -1,5 +1,6 @@
 package MODaStar;
 
+import MapManager.PotentialField;
 import bwapi.Color;
 import bwapi.Game;
 import bwapi.Position;
@@ -94,113 +95,112 @@ public class GridMap {
         }
     }
 
-
     /* ------------------- Main functionality methods ------------------- */
 //ToDo: refresh mapy - zavisi od implementacie Potential fieldov
-//    public void refreshGridMap(PotentialField pPotentialField) {
-//        Block centerBlock=getBlockByPosition_blockMap(pPotentialField.getPosition());
-//        int columnCounter=centerBlock.getColumn();
-//
-//        double blockSideX=centerBlock.getRadius();
-//        int radiusBlockCount=0;
-//        radiusBlockCount=(int)(pPotentialField.getRadius()/blockSideX);
-//        /*
-//        while(pPotentialField.isPositionInRange(blockMap[centerBlock.getRow()][columnCounter].getPosition())) {
-//            radiusBlockCount++;
-//            columnCounter++;
-//        }
-//        */
-//
-//        int row=centerBlock.getRow()-radiusBlockCount;
-//        int col=centerBlock.getColumn()-radiusBlockCount;
-//        int maxRowRange=centerBlock.getRow()+radiusBlockCount;
-//        int maxColRange=centerBlock.getColumn()+radiusBlockCount;
-//
-//        while(row<=maxRowRange) {
-//            if(row<rows) {
-//                while(col<=maxColRange) {
-//                    if(col<columns) {
-//                        if(pPotentialField.isPositionInRange(blockMap[row][col].getPosition())) {
-//                            if(pPotentialField.getUnitType().getAirWeapon().getMaxRange()>30||pPotentialField.getUnitType().getAirWeapon().getMaxRange()>30) {
-//                                blockMap[row][col].setDamage(blockMap[row][col].getDamage() - DAMAGE_MODIFIER * pPotentialField.getUnitType().getGroundWeapon().getDamageAmount());
-//                            } else {
-//                                blockMap[row][col].setDamage(blockMap[row][col].getDamage() - DAMAGE_MODIFIER * (pPotentialField.getRangeLengthInPercent(blockMap[row][col].getPosition()) * (pPotentialField.getUnitType().getGroundWeapon().getDamageAmount())));
-//                            }
-//
-//                            if(blockMap[row][col].getDamage()<=0.01) {
-//                                blockMap[row][col].setShowInGame(false);
-//                                blockMap[row][col].setInPotentialField(false);
-//                                blockMap[row][col].setAirDamage(false);
-//                                blockMap[row][col].setGroundDamage(false);
-//                            }
-//                        }
-//                    }
-//                    col++;
-//                }
-//            }
-//            row++;
-//            col=centerBlock.getColumn()-radiusBlockCount;
-//        }
-//    }
+    public void refreshGridMap(PotentialField pPotentialField) {
+        Block centerBlock=getBlockByPosition_blockMap(pPotentialField.getPosition());
+        int columnCounter=centerBlock.getColumn();
 
-//    public void updateGridMap(PotentialField pPotentialField) {
-//        Block centerBlock=getBlockByPosition_blockMap(pPotentialField.getPosition());
-//        int columnCounter=centerBlock.getColumn();
-//
-//        double blockSideX=centerBlock.getRadius();
-//        int radiusBlockCount=0;
-//        radiusBlockCount=(int)(pPotentialField.getRadius()/blockSideX);
-//        /*
-//        while(pPotentialField.isPositionInRange(blockMap[centerBlock.getRow()][columnCounter].getPosition())) {
-//            radiusBlockCount++;
-//            columnCounter++;
-//        }
-//        */
-//
-//        int row=centerBlock.getRow()-radiusBlockCount;
-//        int col=centerBlock.getColumn()-radiusBlockCount;
-//        int maxRowRange=centerBlock.getRow()+radiusBlockCount;
-//        int maxColRange=centerBlock.getColumn()+radiusBlockCount;
-//
-//        while(row<=maxRowRange) {
-//            if(row<rows) {
-//                while(col<=maxColRange) {
-//                    if(col<columns) {
-//                        if(pPotentialField.isPositionInRange(blockMap[row][col].getPosition())) {
-//                            if(SHOW_GRIDINPOTENTIALFIELD) {
-//                                blockMap[row][col].setShowInGame(true);
-//                            }
-//                            blockMap[row][col].setInPotentialField(true);
-//
-//                            boolean airToAir=pPotentialField.getUnitType().getAirWeapon().isTargetsAir();
-//                            boolean airToGround=pPotentialField.getUnitType().getAirWeapon().isTargetsGround();
-//                            boolean groundToGround=pPotentialField.getUnitType().getGroundWeapon().isTargetsGround();
-//                            boolean groundToAir=pPotentialField.getUnitType().getGroundWeapon().isTargetsAir();
-//
-//                            if(airToAir||groundToAir) {
-//                                blockMap[row][col].setAirDamage(true);
-//                            }
-//                            if(airToGround||groundToGround) {
-//                                blockMap[row][col].setGroundDamage(true);
-//                            }
-//
-//                            //System.out.println("Air DMG = "+blockMap[row][col].isAirDamage());
-//                            //System.out.println("Ground DMG = "+blockMap[row][col].isGroundDamage());
-//
-//                            if(pPotentialField.getUnitType().getGroundWeapon().getMaxRange()>30||pPotentialField.getUnitType().getAirWeapon().getMaxRange()>30) {
-//                                blockMap[row][col].setDamage(blockMap[row][col].getDamage() + DAMAGE_MODIFIER*pPotentialField.getUnitType().getGroundWeapon().getDamageAmount());
-//                            } else {
-//                                blockMap[row][col].setDamage(blockMap[row][col].getDamage() + DAMAGE_MODIFIER * (pPotentialField.getRangeLengthInPercent(blockMap[row][col].getPosition()) * (pPotentialField.getUnitType().getGroundWeapon().getDamageAmount())));
-//                            }
-//                        }
-//                    }
-//                    col++;
-//                }
-//            }
-//            row++;
-//            col=centerBlock.getColumn()-radiusBlockCount;
-//        }
-//    }
+        double blockSideX=centerBlock.getRadius();
+        int radiusBlockCount=0;
+        radiusBlockCount=(int)(pPotentialField.getRadius()/blockSideX);
+        /*
+        while(pPotentialField.isPositionInRange(blockMap[centerBlock.getRow()][columnCounter].getPosition())) {
+            radiusBlockCount++;
+            columnCounter++;
+        }
+        */
+
+        int row=centerBlock.getRow()-radiusBlockCount;
+        int col=centerBlock.getColumn()-radiusBlockCount;
+        int maxRowRange=centerBlock.getRow()+radiusBlockCount;
+        int maxColRange=centerBlock.getColumn()+radiusBlockCount;
+
+        while(row<=maxRowRange) {
+            if(row<rows) {
+                while(col<=maxColRange) {
+                    if(col<columns) {
+                        if(pPotentialField.isPositionInRange(blockMap[row][col].getPosition())) {
+                            if(pPotentialField.getUnitType().airWeapon().maxRange()>30||pPotentialField.getUnitType().airWeapon().maxRange()>30) {
+                                blockMap[row][col].setDamage(blockMap[row][col].getDamage() - DAMAGE_MODIFIER * pPotentialField.getUnitType().groundWeapon().damageAmount());
+                            } else {
+                                blockMap[row][col].setDamage(blockMap[row][col].getDamage() - DAMAGE_MODIFIER * (pPotentialField.getRangeLengthInPercent(blockMap[row][col].getPosition()) * (pPotentialField.getUnitType().groundWeapon().damageAmount())));
+                            }
+
+                            if(blockMap[row][col].getDamage()<=0.01) {
+                                blockMap[row][col].setShowInGame(false);
+                                blockMap[row][col].setInPotentialField(false);
+                                blockMap[row][col].setAirDamage(false);
+                                blockMap[row][col].setGroundDamage(false);
+                            }
+                        }
+                    }
+                    col++;
+                }
+            }
+            row++;
+            col=centerBlock.getColumn()-radiusBlockCount;
+        }
+    }
+
+    public void updateGridMap(PotentialField pPotentialField) {
+        Block centerBlock=getBlockByPosition_blockMap(pPotentialField.getPosition());
+        int columnCounter=centerBlock.getColumn();
+
+        double blockSideX=centerBlock.getRadius();
+        int radiusBlockCount=0;
+        radiusBlockCount=(int)(pPotentialField.getRadius()/blockSideX);
+
+        while(pPotentialField.isPositionInRange(blockMap[centerBlock.getRow()][columnCounter].getPosition())) {
+            radiusBlockCount++;
+            columnCounter++;
+        }
+
+
+        int row=centerBlock.getRow()-radiusBlockCount;
+        int col=centerBlock.getColumn()-radiusBlockCount;
+        int maxRowRange=centerBlock.getRow()+radiusBlockCount;
+        int maxColRange=centerBlock.getColumn()+radiusBlockCount;
+
+        while(row<=maxRowRange) {
+            if(row<rows) {
+                while(col<=maxColRange) {
+                    if(col<columns) {
+                        if(pPotentialField.isPositionInRange(blockMap[row][col].getPosition())) {
+                            if(SHOW_GRIDINPOTENTIALFIELD) {
+                                blockMap[row][col].setShowInGame(true);
+                            }
+                            blockMap[row][col].setInPotentialField(true);
+
+                            boolean airToAir=pPotentialField.getUnitType().airWeapon().targetsAir();
+                            boolean airToGround=pPotentialField.getUnitType().airWeapon().targetsGround();
+                            boolean groundToGround=pPotentialField.getUnitType().groundWeapon().targetsGround();
+                            boolean groundToAir=pPotentialField.getUnitType().groundWeapon().targetsAir();
+
+                            if(airToAir||groundToAir) {
+                                blockMap[row][col].setAirDamage(true);
+                            }
+                            if(airToGround||groundToGround) {
+                                blockMap[row][col].setGroundDamage(true);
+                            }
+
+                            //System.out.println("Air DMG = "+blockMap[row][col].isAirDamage());
+                            //System.out.println("Ground DMG = "+blockMap[row][col].isGroundDamage());
+
+                            if(pPotentialField.getUnitType().groundWeapon().maxRange()>30||pPotentialField.getUnitType().airWeapon().maxRange()>30) {
+                                blockMap[row][col].setDamage(blockMap[row][col].getDamage() + DAMAGE_MODIFIER*pPotentialField.getUnitType().groundWeapon().damageAmount());
+                            } else {
+                                blockMap[row][col].setDamage(blockMap[row][col].getDamage() + DAMAGE_MODIFIER * (pPotentialField.getRangeLengthInPercent(blockMap[row][col].getPosition()) * (pPotentialField.getUnitType().groundWeapon().damageAmount())));
+                            }
+                        }
+                    }
+                    col++;
+                }
+            }
+            row++;
+            col=centerBlock.getColumn()-radiusBlockCount;
+        }
+    }
 
     public Block getBlockByPosition_blockMap(Position position) {
         int posX=position.getX();
