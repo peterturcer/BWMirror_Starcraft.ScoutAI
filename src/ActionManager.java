@@ -4,7 +4,6 @@ import MapManager.*;
 import bwapi.Position;
 import bwapi.Unit;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 
 /**
