@@ -110,6 +110,10 @@ public class MapManager {
         return null;
     }
 
+    public int getExpanzionCount() {
+        return expansionPositions.size();
+    }
+
     public AStarModule getaStarModule() {
         return aStarModule;
     }
@@ -127,5 +131,85 @@ public class MapManager {
 
     public ArrayList<PotentialField> getDangerFields() {
         return dangerFields;
+    }
+
+    public void setaStarModule(AStarModule aStarModule) {
+        this.aStarModule = aStarModule;
+    }
+
+    public HeatMap getHeatMap() {
+        return heatMap;
+    }
+
+    public void setHeatMap(HeatMap heatMap) {
+        this.heatMap = heatMap;
+    }
+
+    public Position getMyBasePosition() {
+        return myBasePosition;
+    }
+
+    public void setMyBasePosition(Position myBasePosition) {
+        this.myBasePosition = myBasePosition;
+    }
+
+    public ArrayList<PotentialField> getEnemyBasePositions() {
+        return enemyBasePositions;
+    }
+
+    public void setEnemyBasePositions(ArrayList<PotentialField> enemyBasePositions) {
+        this.enemyBasePositions = enemyBasePositions;
+    }
+
+    public ArrayList<PotentialField> getExpansionPositions() {
+        return expansionPositions;
+    }
+
+    public void setExpansionPositions(ArrayList<PotentialField> expansionPositions) {
+        this.expansionPositions = expansionPositions;
+    }
+
+    public void setDangerFields(ArrayList<PotentialField> dangerFields) {
+        this.dangerFields = dangerFields;
+    }
+
+    public ArrayList<PotentialField> getRetreatFields() {
+        return retreatFields;
+    }
+
+    public void setRetreatFields(ArrayList<PotentialField> retreatFields) {
+        this.retreatFields = retreatFields;
+    }
+
+    public List<Chokepoint> getChokePoints() {
+        return chokePoints;
+    }
+
+    public void setChokePoints(List<Chokepoint> chokePoints) {
+        this.chokePoints = chokePoints;
+    }
+
+    public ArrayList<ScoutingArea> getScoutingAreas() {
+        return scoutingAreas;
+    }
+
+    public void setScoutingAreas(ArrayList<ScoutingArea> scoutingAreas) {
+        this.scoutingAreas = scoutingAreas;
+    }
+
+    public ArrayList<ScoutingArea> getArmyArea() {
+        return armyArea;
+    }
+
+    public void setArmyArea(ArrayList<ScoutingArea> armyArea) {
+        this.armyArea = armyArea;
+    }
+
+    public AStarPathCalculator getStaticPathCalculator() {
+        return staticPathCalculator;
+    }
+
+    public void setStaticPathCalculator(AStarPathCalculator staticPathCalculator) {
+        this.staticPathCalculator = staticPathCalculator;
     }
 }

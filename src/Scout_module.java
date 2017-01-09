@@ -9,6 +9,8 @@ import java.util.Random;
  */
 public class Scout_module {
 
+    public static final int SAFETY_LEVEL=2;
+
     //Test public
     public void helloWorld(Game pGame) {
         Random rnd=new Random();
