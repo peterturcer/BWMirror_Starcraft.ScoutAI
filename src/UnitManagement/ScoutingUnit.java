@@ -1,7 +1,8 @@
-package MapManager;
+package UnitManagement;
 
 import MODaStar.AStarPathCalculator;
 import MODaStar.Block;
+import MapManager.*;
 import bwapi.Color;
 import bwapi.Game;
 import bwapi.Unit;
@@ -69,8 +70,7 @@ public class ScoutingUnit {
 
     public void enemyDetected(Unit pUnit, MapManager pMapManager, Game pGame) {
         //do podmienky      microPathCalculator==null&&microPath.isEmpty()&&
-/*      TODO porovnavanie > < pre position v bwmirror nefunguje
-        if(unit.getPosition()(pUnit.getPosition())<unit.getType().sightRange()+pUnit.getType().sightRange()) {
+        if(unit.getPosition().getDistance(pUnit.getPosition())<unit.getType().sightRange()+pUnit.getType().sightRange()) {
             pMapManager.refreshMap(pGame);
             for(Block b:path) {
                 b.setDamage(pMapManager.getaStarModule().getGridMap().getBlockMap()[b.getRow()][b.getColumn()].getDamage());
@@ -86,7 +86,6 @@ public class ScoutingUnit {
             }
 
         }
-*/
     }
 
     public void manageAll(MapManager pMapManager, Game pGame) {
@@ -95,7 +94,7 @@ public class ScoutingUnit {
         manageMicroPathCalculator();
         localDangerCheck(pMapManager, pGame);
         manageIdle();
-        manageScoutingArea(pGame, pMapManager);
+//        manageScoutingArea(pGame, pMapManager);
         manageFinishedSignalization();
     }
 
@@ -183,40 +182,40 @@ public class ScoutingUnit {
         }
     }
 
-    public void manageScoutingArea(Game pGame, MapManager pMapManager) {
-        if(scoutingArea!=null&&scoutingArea.size()>0) {
-            if(aStarPathCalculator==null&&path.size()>0) {
-                if(pGame.isVisible(path.get(0).getPosition().getX(),path.get(0).getPosition().getY())) {
-                    scoutingArea.remove(scoutingArea.getNearestField(this,pGame));
-                    aStarPathCalculator=pMapManager.buildPath(unit,scoutingArea.getNearestField(this,pGame).getPosition(),1,unit.getType().isFlyer(),pGame,Color.Yellow);
-                }
-            } else if(aStarPathCalculator==null) {
-                PotentialField field=scoutingArea.getNearestField(this,pGame);
-                if(pGame.isVisible(field.getPosition().getX(),field.getPosition().getY())) {
-                    scoutingArea.remove(field);
-                } else {
-                    aStarPathCalculator=pMapManager.buildPath(unit,field.getPosition(),1,unit.getType().isFlyer(),pGame, Color.Blue);
-                }
-            }
-        }
-    }
+//    public void manageScoutingArea(Game pGame, MapManager pMapManager) {
+//        if(scoutingArea!=null&&scoutingArea.size()>0) {
+//            if(aStarPathCalculator==null&&path.size()>0) {
+//                if(pGame.isVisible(path.get(0).getPosition().getX(),path.get(0).getPosition().getY())) {
+//                    scoutingArea.remove(scoutingArea.getNearestField(this,pGame));
+//                    aStarPathCalculator=pMapManager.buildPath(unit,scoutingArea.getNearestField(this,pGame).getPosition(),1,unit.getType().isFlyer(),pGame,Color.Yellow);
+//                }
+//            } else if(aStarPathCalculator==null) {
+//                PotentialField field=scoutingArea.getNearestField(this,pGame);
+//                if(pGame.isVisible(field.getPosition().getX(),field.getPosition().getY())) {
+//                    scoutingArea.remove(field);
+//                } else {
+//                    aStarPathCalculator=pMapManager.buildPath(unit,field.getPosition(),1,unit.getType().isFlyer(),pGame, Color.Blue);
+//                }
+//            }
+//        }
+//    }
 
     /* ------------------- data structure operation methods ------------------- */
 
 
     /* ------------------- other methods ------------------- */
 
-    public void scoutingAreaTEST(MapManager pMapManager, Game pGame) {
-
-        if(scoutingArea.size()>0) {
-            System.out.println("Scouting area fields = "+scoutingArea.size());
-            PotentialField pf=scoutingArea.getNearestField(this,pGame);
-            aStarPathCalculator=pMapManager.buildPath(unit,pf.getPosition(), 1, false, pGame, Color.Blue);
-            scoutingArea.remove(pf);
-            System.out.println("Scouting area fields = " + scoutingArea.size());
-        }
-
-    }
+//    public void scoutingAreaTEST(MapManager pMapManager, Game pGame) {
+//
+//        if(scoutingArea.size()>0) {
+//            System.out.println("Scouting area fields = "+scoutingArea.size());
+//            PotentialField pf=scoutingArea.getNearestField(this,pGame);
+//            aStarPathCalculator=pMapManager.buildPath(unit,pf.getPosition(), 1, false, pGame, Color.Blue);
+//            scoutingArea.remove(pf);
+//            System.out.println("Scouting area fields = " + scoutingArea.size());
+//        }
+//
+//    }
 
     public void micro(MapManager pMapManager,Game pGame) {
         Block safeEND=null;
@@ -336,6 +335,39 @@ public class ScoutingUnit {
     public void removeFromPath(int pStartIndex, int pEndIndex) {
         for(int i=pStartIndex;i<=pEndIndex;i++) {
             path.remove(pStartIndex);
+        }
+    }
+
+    /* ------------------- Drawing functions ------------------- */
+
+    public void drawAll(Game pGame) {
+        if(unit.exists()) {
+            drawPath(pGame);
+            drawMicroPath(pGame);
+//            drawScoutingArea();
+        }
+    }
+
+//    public void drawScoutingArea() {
+//        if(scoutingArea!=null&&unit.exists()) {
+//            scoutingArea.drawScoutingArea();
+//        }
+//    }
+
+    public void drawPath(Game pGame) {
+        if(path!=null&&path.size()>0&&unit.exists()) {
+            for(Block b:path) {
+                pGame.drawCircleMap(b.getPosition(),5,Color.Green);
+                pGame.drawTextMap(b.getPosition().getX()+50,b.getPosition().getY(),b.getPosition().toString());
+            }
+        }
+    }
+
+    public void drawMicroPath(Game pGame) {
+        if(microPath!=null&&microPath.size()>0&&unit.exists()) {
+            for(Block b : microPath) {
+                pGame.drawCircleMap(b.getPosition(),5,Color.Red);
+            }
         }
     }
 
