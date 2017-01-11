@@ -1,9 +1,6 @@
 package UnitManagement;
 
-import bwapi.Color;
-import bwapi.Game;
-import bwapi.Unit;
-import bwapi.UnitType;
+import bwapi.*;
 import MapManager.*;
 
 import java.util.ArrayList;
@@ -240,7 +237,6 @@ public class UnitManager {
         for(ScoutingUnit u:scoutingUnits) {
             if(u.getUnit().exists()) {
                 game.drawBoxMap(u.getUnit().getPosition().getX()-25,u.getUnit().getPosition().getY()-25,u.getUnit().getPosition().getX()+25,u.getUnit().getPosition().getY()+25, Color.Yellow);
-                game.drawTextMap(u.getUnit().getPosition().getX(),u.getUnit().getPosition().getY()+40,Boolean.toString(game.isWalkable(u.getUnit().getPosition().getX(),u.getUnit().getPosition().getY())));
             }
         }
     }

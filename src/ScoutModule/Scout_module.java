@@ -38,7 +38,6 @@ public class Scout_module {
     }
 
     public void TEST_scoutBase() {
-        System.out.println("Scouting unit = "+unitManager.getGroundScoutingUnits().get(0).getUnit().getType().toString());
         actionManager.scoutBase(unitManager.getGroundScoutingUnits().get(0),SAFETY_LEVEL);
     }
 
@@ -65,19 +64,5 @@ public class Scout_module {
     public void manageAll() {
         mapManager.manageAll(game);
         unitManager.manageAll(mapManager);
-    }
-
-    //Test public
-    public void helloWorld(Game pGame) {
-        Random rnd=new Random();
-        int x;
-        int y;
-        for(Unit u:pGame.getAllUnits()) {
-            if(u.canMove()&&!u.isMoving()) {
-                x=rnd.nextInt(5000);
-                y=rnd.nextInt(5000);
-                u.move(new Position(x,y),false);
-            }
-        }
     }
 }

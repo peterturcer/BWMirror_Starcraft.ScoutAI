@@ -71,7 +71,6 @@ public class Block {
         row=pRow;
         column=pColumn;
         accessibleByAir=true;
-        accessibleByGround=isAccessibleByGround(game);
         startingBlock=false;
         damage=0;
         airDamage=false;
