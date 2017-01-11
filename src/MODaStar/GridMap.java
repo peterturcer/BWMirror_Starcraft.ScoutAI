@@ -4,6 +4,7 @@ import MapManager.PotentialField;
 import bwapi.Color;
 import bwapi.Game;
 import bwapi.Position;
+import bwapi.TilePosition;
 
 import java.util.ArrayList;
 
@@ -12,7 +13,7 @@ import java.util.ArrayList;
  */
 public class GridMap {
 
-    public static boolean DEBUG=false;
+    public static boolean DEBUG=true;
 
     private Block[][] blockMap;
 
@@ -29,16 +30,15 @@ public class GridMap {
 
     public GridMap(int rectangleSidePX, Game pGame) {
 
-
-        rows=pGame.mapHeight()/rectangleSidePX;
-        columns=pGame.mapWidth()/rectangleSidePX;
+        rows=(pGame.mapHeight()*TilePosition.SIZE_IN_PIXELS)/rectangleSidePX;
+        columns=(pGame.mapWidth()*TilePosition.SIZE_IN_PIXELS)/rectangleSidePX;
         blockMap=new Block[rows][columns];
 
         if(GridMap.DEBUG) {
             System.out.println("--:: GridMap initialization ::--");
             System.out.println("     - Rectangle size = "+rectangleSidePX);
-            System.out.println("     - Map PX = "+pGame.mapWidth()+" ,Grid rows = "+rows);
-            System.out.println("     - Map PY = "+pGame.mapHeight()+" ,Grid cols = "+columns);
+            System.out.println("     - Map X = "+pGame.mapWidth()*TilePosition.SIZE_IN_PIXELS+" ,Grid rows = "+rows);
+            System.out.println("     - Map Y = "+pGame.mapHeight()*TilePosition.SIZE_IN_PIXELS+" ,Grid cols = "+columns);
         }
 
         for(int i=0;i<rows;i++) {

@@ -1,3 +1,4 @@
+import ScoutModule.Scout_module;
 import bwapi.*;
 import bwta.BWTA;
 
@@ -30,9 +31,15 @@ public class Bot extends DefaultBWListener {
         super.onStart();
         game = mirror.getGame();
         player = game.self();
-        scout=new Scout_module();
 
-        game.setLocalSpeed(15);
+        System.out.println("Analyzing map...");
+        BWTA.readMap();
+        BWTA.analyze();
+        System.out.println("BWTA scan complete !");
+
+        scout=new Scout_module(game);
+
+        game.setLocalSpeed(30);
         game.enableFlag(1);
 
         System.out.println("ScoutAI bot working.");
@@ -46,7 +53,8 @@ public class Bot extends DefaultBWListener {
     @Override
     public void onFrame() {
         super.onFrame();
-        scout.helloWorld(game);
+
+        scout.onFrame();
     }
 
     @Override

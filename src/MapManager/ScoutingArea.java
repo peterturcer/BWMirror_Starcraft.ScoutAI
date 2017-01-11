@@ -1,7 +1,7 @@
 package MapManager;
 
+import UnitManagement.ScoutingUnit;
 import bwapi.Game;
-
 import java.util.ArrayList;
 
 /**
