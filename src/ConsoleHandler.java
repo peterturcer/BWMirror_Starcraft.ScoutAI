@@ -1,3 +1,5 @@
+import MODaStar.AStarModule;
+import ScoutModule.Scout_module;
 import UnitManagement.ActionManager;
 
 /**
@@ -5,10 +7,10 @@ import UnitManagement.ActionManager;
  */
 public class ConsoleHandler {
 
-    private ActionManager actionManager;
+    Scout_module scoutBot;
 
-    public ConsoleHandler(ActionManager pActionManager) {
-        actionManager=pActionManager;
+    public ConsoleHandler(Scout_module pScoutBot) {
+        scoutBot=pScoutBot;
     }
 
     /**
@@ -18,11 +20,25 @@ public class ConsoleHandler {
      */
     public void messageHandler(String pMessage) {
         switch (pMessage) {
-            case "scoutPos":
+            case "add": addScoutingUnit();
                 break;
-            case "returnHome":
+            case "scbase": scoutBase_selectedUnits();
+                break;
+            case "rethome": returnHome_selectedUnits();
                 break;
         }
+    }
+
+    public void addScoutingUnit() {
+        scoutBot.getUnitManager().addSelectedUnit();
+    }
+
+    public void scoutBase_selectedUnits() {
+        scoutBot.getActionManager().scoutBase_selectedUnits(scoutBot.getUnitManager().getAllScoutingUnits());
+    }
+
+    public void returnHome_selectedUnits() {
+        scoutBot.getActionManager().returnHome_selectedUnits(scoutBot.getUnitManager().getAllScoutingUnits());
     }
 
 }

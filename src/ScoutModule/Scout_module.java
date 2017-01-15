@@ -3,6 +3,7 @@ package ScoutModule;
 import UnitManagement.*;
 import bwapi.*;
 import MapManager.*;
+import bwta.BWTA;
 
 import java.util.Calendar;
 import java.util.Random;
@@ -14,11 +15,11 @@ public class Scout_module {
 
     public static boolean DEBUG=true;
 
-    public static final int SAFETY_LEVEL=1;
+    public static final int SAFETY_LEVEL=3;
 
-    public static final int MAP_REFRESH_FRAME_COUNT=30;
+    public static final int MAP_REFRESH_FRAME_COUNT=15;
 
-    public static final int UNIT_DANGERCHECK_FRAME_COUNT=35;
+    public static final int UNIT_DANGERCHECK_FRAME_COUNT=17;
 
     private Game game;
     private UnitManager unitManager;
@@ -32,6 +33,31 @@ public class Scout_module {
         actionManager=new ActionManager(mapManager,game);
     }
 
+    public void onStart() {
+        initializeModules();
+    }
+
+    public void onFrame() {
+
+//        /* AUTOTEST */
+//        if(game.getFrameCount()==70) {
+//            System.out.println("Starting initializations...");
+//            TEST_initializeAll();
+//            System.out.println("Initializations done !");
+//        }
+//        if(game.getFrameCount()==90) {
+//            System.out.println("Scouting base...");
+//            TEST_scoutBase();
+//        }
+
+        manageAll();
+        drawAll();
+    }
+
+    public void initializeModules() {
+        mapManager.initializeAll();
+    }
+
     public void TEST_initializeAll() {
         mapManager.initializeAll();
         unitManager.TEST_initScoutingUnits();
@@ -42,20 +68,9 @@ public class Scout_module {
         actionManager.scoutBase(unitManager.getGroundScoutingUnits().get(0),SAFETY_LEVEL);
     }
 
-    public void onFrame() {
 
-        if(game.getFrameCount()==70) {
-            System.out.println("Starting initializations...");
-            TEST_initializeAll();
-            System.out.println("Initializations done !");
-        }
-        if(game.getFrameCount()==90) {
-            System.out.println("Scouting base...");
-            TEST_scoutBase();
-        }
-        manageAll();
-        drawAll();
-    }
+
+
 
     public void drawAll() {
         mapManager.drawAll();
@@ -79,5 +94,41 @@ public class Scout_module {
                 u.move(new Position(x,y),false);
             }
         }
+    }
+
+
+
+
+
+    public Game getGame() {
+        return game;
+    }
+
+    public void setGame(Game game) {
+        this.game = game;
+    }
+
+    public UnitManager getUnitManager() {
+        return unitManager;
+    }
+
+    public void setUnitManager(UnitManager unitManager) {
+        this.unitManager = unitManager;
+    }
+
+    public MapManager getMapManager() {
+        return mapManager;
+    }
+
+    public void setMapManager(MapManager mapManager) {
+        this.mapManager = mapManager;
+    }
+
+    public ActionManager getActionManager() {
+        return actionManager;
+    }
+
+    public void setActionManager(ActionManager actionManager) {
+        this.actionManager = actionManager;
     }
 }

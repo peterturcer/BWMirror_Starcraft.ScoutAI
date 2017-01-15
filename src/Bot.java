@@ -10,7 +10,9 @@ public class Bot extends DefaultBWListener {
     Mirror mirror;
     Player player;
     Game game;
+
     Scout_module scout;
+    ConsoleHandler consoleHandler;
 
     public static void main(String[] args) {
         new Bot().run();
@@ -38,6 +40,8 @@ public class Bot extends DefaultBWListener {
         System.out.println("BWTA scan complete !");
 
         scout=new Scout_module(game);
+        scout.onStart();
+        consoleHandler=new ConsoleHandler(scout);
 
         game.setLocalSpeed(30);
         game.enableFlag(1);
@@ -60,6 +64,8 @@ public class Bot extends DefaultBWListener {
     @Override
     public void onSendText(String s) {
         super.onSendText(s);
+
+        consoleHandler.messageHandler(s);
     }
 
     @Override

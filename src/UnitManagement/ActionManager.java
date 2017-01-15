@@ -1,13 +1,12 @@
 package UnitManagement;
 
 import MODaStar.AStarPathCalculator;
-import bwapi.Color;
-import bwapi.Game;
+import ScoutModule.Scout_module;
+import bwapi.*;
 import MapManager.*;
-import bwapi.Position;
-import bwapi.Unit;
 
 import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Handles all actions of the scout bot
@@ -42,6 +41,14 @@ public class ActionManager {
         scoutPosition(mapManager.getEnemyBasePosition().getPoint(), pScoutingUnit, pLevelOfSafety);
     }
 
+    public void scoutBase_selectedUnits(List<ScoutingUnit> pScoutingUnits) {
+        for(ScoutingUnit scu:pScoutingUnits) {
+            if(scu.getUnit().isSelected()) {
+                scoutBase(scu, Scout_module.SAFETY_LEVEL);
+            }
+        }
+    }
+
     public void scoutMousePosition(ScoutingUnit pScoutingUnit, int pLevelOfSafety) {
         scoutPosition(game.getMousePosition(), pScoutingUnit, pLevelOfSafety);
     }
@@ -50,6 +57,14 @@ public class ActionManager {
         Position base=mapManager.getMyBasePosition();
 
         pScoutingUnit.scout(mapManager.buildPath(pScoutingUnit.getUnit(),base, pLevelOfSafety,pScoutingUnit.getUnit().getType().isFlyer(),game, Color.Blue),false);
+    }
+
+    public void returnHome_selectedUnits(List<ScoutingUnit> pScoutingUnits) {
+        for(ScoutingUnit scu: pScoutingUnits) {
+            if(scu.getUnit().isSelected()) {
+                returnHome(scu,Scout_module.SAFETY_LEVEL);
+            }
+        }
     }
 
     public void scoutPosition(Position pPosition, ScoutingUnit pScoutingUnit, int pLevelOfSafety) {

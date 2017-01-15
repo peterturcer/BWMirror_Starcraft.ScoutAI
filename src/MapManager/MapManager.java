@@ -76,6 +76,7 @@ public class MapManager {
         scoutingAreas=new ArrayList<>();
         game=pGame;
         aStarModule=new AStarModule(new GridMap(MapManager.GRIDEDGESIZE,game));
+        myBasePosition=BWTA.getStartLocation(game.self()).getPosition();
     }
 
     public MapManager(Game pGame, AStarModule pAStarModule, HeatMap pHeatMap) {
@@ -86,6 +87,7 @@ public class MapManager {
         aStarModule=pAStarModule;
         heatMap=pHeatMap;
         game=pGame;
+        myBasePosition=BWTA.getStartLocation(game.self()).getPosition();
     }
 
     /**
@@ -99,6 +101,7 @@ public class MapManager {
         dangerFields=new ArrayList<>();
         retreatFields=new ArrayList<>();
         game=pGame;
+        myBasePosition=BWTA.getStartLocation(game.self()).getPosition();
     }
 
 

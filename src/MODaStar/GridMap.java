@@ -13,7 +13,7 @@ import java.util.ArrayList;
  */
 public class GridMap {
 
-    public static boolean DEBUG=true;
+    public static boolean DEBUG=false;
 
     private Block[][] blockMap;
 
@@ -96,7 +96,8 @@ public class GridMap {
     }
 
     /* ------------------- Main functionality methods ------------------- */
-//ToDo: refresh mapy - zavisi od implementacie Potential fieldov
+
+
     public void refreshGridMap(PotentialField pPotentialField) {
         Block centerBlock=getBlockByPosition_blockMap(pPotentialField.getPosition());
         int columnCounter=centerBlock.getColumn();
@@ -104,12 +105,12 @@ public class GridMap {
         double blockSideX=centerBlock.getRadius();
         int radiusBlockCount=0;
         radiusBlockCount=(int)(pPotentialField.getRadius()/blockSideX);
-        /*
-        while(pPotentialField.isPositionInRange(blockMap[centerBlock.getRow()][columnCounter].getPosition())) {
-            radiusBlockCount++;
-            columnCounter++;
-        }
-        */
+
+//        while(pPotentialField.isPositionInRange(blockMap[centerBlock.getRow()][columnCounter].getPosition())) {
+//            radiusBlockCount++;
+//            columnCounter++;
+//        }
+
 
         int row=centerBlock.getRow()-radiusBlockCount;
         int col=centerBlock.getColumn()-radiusBlockCount;
