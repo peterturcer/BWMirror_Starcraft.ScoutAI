@@ -495,7 +495,7 @@ public class MapManager {
     public void drawAll() {
         drawBasePosition();
         drawExpansionPositions();
-        drawHeatMap(game);
+        //drawHeatMap(game);
         drawDangerFields();
         drawDangerGrid();
     }
