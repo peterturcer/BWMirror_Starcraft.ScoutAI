@@ -4,6 +4,8 @@ import bwapi.*;
 
 import java.util.List;
 
+import static MapManager.HeatMap.GRIDTILESIZE;
+
 /**
  * Represents certain area on the map and provides information about this area
  */
@@ -167,6 +169,29 @@ public class PotentialField {
         return game.isVisible(this.getPosition().toTilePosition());
     }
 
+    /**
+     * checks if this potential field is visible
+     * @param game game objects
+     * @return true if atleast one of its corner is visible
+     */
+    public boolean isVisible(Game game){
+        /*TilePosition upLeft = new TilePosition((int)(row*GRIDTILESIZE),(int)(column*GRIDTILESIZE));
+        TilePosition upRight = new TilePosition((int)(row*GRIDTILESIZE),
+                (int)(column*GRIDTILESIZE)+GRIDTILESIZE-1);
+        TilePosition downLeft = new TilePosition((int)(row*GRIDTILESIZE)+GRIDTILESIZE-1,
+                (int)(column*GRIDTILESIZE));
+        TilePosition downRight = new TilePosition((int)(row*GRIDTILESIZE)+GRIDTILESIZE-1,
+                (int)(column*GRIDTILESIZE)+GRIDTILESIZE-1);*/
+
+        TilePosition middle = new TilePosition((int)(row*GRIDTILESIZE)+GRIDTILESIZE/2,
+                (int)(column*GRIDTILESIZE)+GRIDTILESIZE/2);
+
+        return game.isVisible(middle); // checks tile in the middle, the other ones ale more precise
+
+        /*return game.isVisible(upLeft) || game.isVisible(upRight) ||
+                game.isVisible(downLeft) || game.isVisible(downRight) || game.isVisible(middle);*/
+
+    }
     public boolean isUnitInRange(Unit pUnit) {
         Position pos=new Position(X,Y);
         if(pos.getDistance(pUnit.getPosition())<=radius&&pUnit.getID()==id) {
@@ -304,4 +329,13 @@ public class PotentialField {
     public void setRadius(int radius) {
         this.radius = radius;
     }
+
+    public void showGraphicsRectangular(Game pGame, Color color) {
+        pGame.drawBoxMap((int) (X+2),
+                (int) (Y + 2),
+                (int) (X -2 + (radius )),
+                (int) (Y-2 + (radius )), color);
+    }
+
+
 }
