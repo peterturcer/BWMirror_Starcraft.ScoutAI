@@ -1,3 +1,4 @@
+import MODQlearning.QExecutor;
 import MODaStar.AStarModule;
 import ScoutModule.Scout_module;
 import UnitManagement.ActionManager;
@@ -26,6 +27,7 @@ public class ConsoleHandler {
                 break;
             case "rethome": returnHome_selectedUnits();
                 break;
+            case "qrun": QExecutor.EXECUTE=true;
         }
     }
 
