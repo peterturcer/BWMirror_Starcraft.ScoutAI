@@ -1,25 +1,29 @@
 package MODaStar;
 
 import MapManager.PotentialField;
-import bwapi.Color;
-import bwapi.Game;
-import bwapi.Position;
-import bwapi.TilePosition;
+import bwapi.*;
+import bwta.BWTA;
+import bwta.Polygon;
 
+import java.awt.image.TileObserver;
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Grid map consists of array of blocks. Provides GEO information for other classes.
  */
 public class GridMap {
 
-    public static boolean DEBUG=true;
+    public static boolean DEBUG=false;
 
     private Block[][] blockMap;
 
     private int rows;
 
     private int columns;
+
+    private List<Position> unwalkablePositions;
 
     public static final double DAMAGE_MODIFIER=0.3;
 
@@ -33,6 +37,8 @@ public class GridMap {
         rows=(pGame.mapHeight()*TilePosition.SIZE_IN_PIXELS)/rectangleSidePX;
         columns=(pGame.mapWidth()*TilePosition.SIZE_IN_PIXELS)/rectangleSidePX;
         blockMap=new Block[rows][columns];
+        unwalkablePositions=new LinkedList<>();
+
 
         if(GridMap.DEBUG) {
             System.out.println("--:: GridMap initialization ::--");
@@ -41,10 +47,23 @@ public class GridMap {
             System.out.println("     - Map Y = "+pGame.mapHeight()*TilePosition.SIZE_IN_PIXELS+" ,Grid cols = "+columns);
         }
 
+        List<Polygon> unwalkablePolygons=BWTA.getUnwalkablePolygons();
+
         for(int i=0;i<rows;i++) {
             for(int j=0;j<columns;j++) {
                 //i a j su prehodene preto, lebo Block(x,y) - pre x zodpoveda hodnota column
-                blockMap[i][j]=new Block(new Position((rectangleSidePX/2)+rectangleSidePX*j,(rectangleSidePX/2)+rectangleSidePX*i),rectangleSidePX,i,j,pGame);
+//                blockMap[i][j]=new Block(new Position((rectangleSidePX/2)+rectangleSidePX*j,(rectangleSidePX/2)+rectangleSidePX*i),rectangleSidePX,i,j,pGame);
+
+                Block b=new Block(new Position((rectangleSidePX/2)+rectangleSidePX*j,(rectangleSidePX/2)+rectangleSidePX*i),rectangleSidePX,i,j,pGame);
+                for(Polygon pol:unwalkablePolygons) {
+                    if(pol.isInside(b.getPosition())) {
+                        b.setAccessibleByGround(false);
+                    } else {
+                        b.setAccessibleByGround(true);
+                    }
+                }
+
+                blockMap[i][j]=b;
             }
         }
 
@@ -64,6 +83,7 @@ public class GridMap {
                 b.setAirDamage(pGridMap.getBlockMap()[i][j].isAirDamage());
                 b.setGroundDamage(pGridMap.getBlockMap()[i][j].isGroundDamage());
                 b.setInPotentialField(pGridMap.getBlockMap()[i][j].isInPotentialField());
+                b.setAccessibleByGround(pGridMap.getBlockMap()[i][j].isAccessibleByGround());
                 blockMap[i][j]=b;
             }
         }
@@ -96,7 +116,8 @@ public class GridMap {
     }
 
     /* ------------------- Main functionality methods ------------------- */
-//ToDo: refresh mapy - zavisi od implementacie Potential fieldov
+
+
     public void refreshGridMap(PotentialField pPotentialField) {
         Block centerBlock=getBlockByPosition_blockMap(pPotentialField.getPosition());
         int columnCounter=centerBlock.getColumn();
@@ -104,12 +125,12 @@ public class GridMap {
         double blockSideX=centerBlock.getRadius();
         int radiusBlockCount=0;
         radiusBlockCount=(int)(pPotentialField.getRadius()/blockSideX);
-        /*
-        while(pPotentialField.isPositionInRange(blockMap[centerBlock.getRow()][columnCounter].getPosition())) {
-            radiusBlockCount++;
-            columnCounter++;
-        }
-        */
+
+//        while(pPotentialField.isPositionInRange(blockMap[centerBlock.getRow()][columnCounter].getPosition())) {
+//            radiusBlockCount++;
+//            columnCounter++;
+//        }
+
 
         int row=centerBlock.getRow()-radiusBlockCount;
         int col=centerBlock.getColumn()-radiusBlockCount;
@@ -481,6 +502,14 @@ public class GridMap {
     }
 
     /* ------------------- Getters and Setters ------------------- */
+
+    public List<Position> getUnwalkablePositions() {
+        return unwalkablePositions;
+    }
+
+    public void setUnwalkablePositions(List<Position> unwalkablePositions) {
+        this.unwalkablePositions = unwalkablePositions;
+    }
 
     public Block[][] getBlockMap() {
         return blockMap;

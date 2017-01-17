@@ -1,8 +1,6 @@
 package MODaStar;
 
-
 import bwapi.*;
-import bwta.BWTA;
 
 /**
  * Class Block represents each block in grid map. Blocks are also used in Tree data structure
@@ -71,7 +69,6 @@ public class Block {
         row=pRow;
         column=pColumn;
         accessibleByAir=true;
-        accessibleByGround=isAccessibleByGround(game);
         startingBlock=false;
         damage=0;
         airDamage=false;
@@ -126,10 +123,12 @@ public class Block {
     /* -------------------Other methods ------------------- */
 
     public boolean isAccessibleByGround(Game game) {
-        if(game!=null) {
-            return game.isWalkable(position.getX(),position.getY());
-        }
-        else return true;
+//        ToDo: nefunguje!!
+//        if(game!=null) {
+//            return game.isWalkable(position.getX(),position.getY());
+//        }
+//        else return true;
+        return true;
     }
 
     public boolean isAccessibleByAir() {

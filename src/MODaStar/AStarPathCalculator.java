@@ -12,7 +12,7 @@ import java.util.ArrayList;
  */
 public class AStarPathCalculator implements Runnable {
 
-    public static boolean DEBUG=true;
+    public static boolean DEBUG=false;
 
     private Thread t;
 

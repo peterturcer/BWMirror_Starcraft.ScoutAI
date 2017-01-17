@@ -3,6 +3,7 @@ package UnitManagement;
 import MODaStar.AStarPathCalculator;
 import MODaStar.Block;
 import MapManager.*;
+import ScoutModule.Scout_module;
 import bwapi.Color;
 import bwapi.Game;
 import bwapi.Unit;
@@ -10,9 +11,11 @@ import bwapi.Unit;
 import java.util.ArrayList;
 
 /**
- * Created by Chudjak Kristián on 05.01.2017.
+ * ScoutingUnit represents exact unit set for scouting tasks. Management of movement is independent of other modules.
+ * ScoutingUnit provides reactive behavior and triggers other detection methods.
  */
 public class ScoutingUnit {
+
     public static final int START_SAFEZONERADIUS=500;
 
     public static final int END_SAFEZONERADIUS=800;
@@ -38,6 +41,7 @@ public class ScoutingUnit {
     private boolean hasTask;
 
     private Block microDestinationBlock;
+
 
     /* ------------------- Constructors ------------------- */
 
@@ -86,6 +90,7 @@ public class ScoutingUnit {
             }
 
         }
+
     }
 
     public void manageAll(MapManager pMapManager, Game pGame) {
@@ -94,7 +99,7 @@ public class ScoutingUnit {
         manageMicroPathCalculator();
         localDangerCheck(pMapManager, pGame);
         manageIdle();
-//        manageScoutingArea(pGame, pMapManager);
+        manageScoutingArea(pGame, pMapManager);
         manageFinishedSignalization();
     }
 
@@ -182,40 +187,40 @@ public class ScoutingUnit {
         }
     }
 
-//    public void manageScoutingArea(Game pGame, MapManager pMapManager) {
-//        if(scoutingArea!=null&&scoutingArea.size()>0) {
-//            if(aStarPathCalculator==null&&path.size()>0) {
-//                if(pGame.isVisible(path.get(0).getPosition().getX(),path.get(0).getPosition().getY())) {
-//                    scoutingArea.remove(scoutingArea.getNearestField(this,pGame));
-//                    aStarPathCalculator=pMapManager.buildPath(unit,scoutingArea.getNearestField(this,pGame).getPosition(),1,unit.getType().isFlyer(),pGame,Color.Yellow);
-//                }
-//            } else if(aStarPathCalculator==null) {
-//                PotentialField field=scoutingArea.getNearestField(this,pGame);
-//                if(pGame.isVisible(field.getPosition().getX(),field.getPosition().getY())) {
-//                    scoutingArea.remove(field);
-//                } else {
-//                    aStarPathCalculator=pMapManager.buildPath(unit,field.getPosition(),1,unit.getType().isFlyer(),pGame, Color.Blue);
-//                }
-//            }
-//        }
-//    }
+    public void manageScoutingArea(Game pGame, MapManager pMapManager) {
+        if(scoutingArea!=null&&scoutingArea.size()>0) {
+            if(aStarPathCalculator==null&&path.size()>0) {
+                if(pGame.isVisible(path.get(0).getPosition().toTilePosition())) {
+                    scoutingArea.remove(scoutingArea.getNearestField(this,pGame));
+                    aStarPathCalculator=pMapManager.buildPath(unit,scoutingArea.getNearestField(this,pGame).getPosition(), Scout_module.SAFETY_LEVEL,unit.getType().isFlyer(),pGame, Color.Yellow);
+                }
+            } else if(aStarPathCalculator==null) {
+                PotentialField field=scoutingArea.getNearestField(this,pGame);
+                if(pGame.isVisible(field.getPosition().toTilePosition())) {
+                    scoutingArea.remove(field);
+                } else {
+                    aStarPathCalculator=pMapManager.buildPath(unit,field.getPosition(),Scout_module.SAFETY_LEVEL,unit.getType().isFlyer(),pGame,Color.Yellow);
+                }
+            }
+        }
+    }
 
     /* ------------------- data structure operation methods ------------------- */
 
 
     /* ------------------- other methods ------------------- */
 
-//    public void scoutingAreaTEST(MapManager pMapManager, Game pGame) {
-//
-//        if(scoutingArea.size()>0) {
-//            System.out.println("Scouting area fields = "+scoutingArea.size());
-//            PotentialField pf=scoutingArea.getNearestField(this,pGame);
-//            aStarPathCalculator=pMapManager.buildPath(unit,pf.getPosition(), 1, false, pGame, Color.Blue);
-//            scoutingArea.remove(pf);
-//            System.out.println("Scouting area fields = " + scoutingArea.size());
-//        }
-//
-//    }
+    public void scoutingAreaTEST(MapManager pMapManager, Game pGame) {
+
+        if(scoutingArea.size()>0) {
+            System.out.println("Scouting area fields = "+scoutingArea.size());
+            PotentialField pf=scoutingArea.getNearestField(this,pGame);
+            aStarPathCalculator=pMapManager.buildPath(unit,pf.getPosition(), Scout_module.SAFETY_LEVEL, false, pGame, Color.Blue);
+            scoutingArea.remove(pf);
+            System.out.println("Scouting area fields = " + scoutingArea.size());
+        }
+
+    }
 
     public void micro(MapManager pMapManager,Game pGame) {
         Block safeEND=null;
@@ -281,7 +286,7 @@ public class ScoutingUnit {
 
                 if(safeSTART!=null&&safeEND!=null) {
                     microDestinationBlock=safeEND;
-                    microPathCalculator=pMapManager.buildPath(unit,safeSTART.getPosition(),microDestinationBlock.getPosition(),1,unit.getType().isFlyer(),pGame,Color.Red);
+                    microPathCalculator=pMapManager.buildPath(unit,safeSTART.getPosition(),microDestinationBlock.getPosition(),Scout_module.SAFETY_LEVEL,unit.getType().isFlyer(),pGame,Color.Red);
                     removeFromPath(removeEND,removeStart);
                 }
 
@@ -290,7 +295,7 @@ public class ScoutingUnit {
                     if((unit.getType().isFlyer()&&pMapManager.getaStarModule().getGridMap().getBlockMap()[path.get(i).getRow()][path.get(i).getColumn()].isAirDamage())||!unit.getType().isFlyer()&&pMapManager.getaStarModule().getGridMap().getBlockMap()[path.get(i).getRow()][path.get(i).getColumn()].isGroundDamage()) {
                         if (path.get(i).isInPotentialField() || pMapManager.getaStarModule().getGridMap().getBlockMap()[path.get(i).getRow()][path.get(i).getColumn()].isInPotentialField()) {
                             microDestinationBlock=path.get(0);
-                            microPathCalculator=pMapManager.buildPath(unit,unit.getPosition(),microDestinationBlock.getPosition(),1,unit.getType().isFlyer(),pGame,Color.Red);
+                            microPathCalculator=pMapManager.buildPath(unit,unit.getPosition(),microDestinationBlock.getPosition(),Scout_module.SAFETY_LEVEL,unit.getType().isFlyer(),pGame,Color.Red);
                             Block b=path.get(0);
                             path.clear();
                             path.add(b);
@@ -308,9 +313,9 @@ public class ScoutingUnit {
             if(interruptMicro&&!unit.isUnderAttack()) {
                 microDestinationBlock=null;
                 microPath=new ArrayList<>();
-                aStarPathCalculator=pMapManager.buildPath(unit,path.get(0).getPosition(),1,unit.getType().isFlyer(),pGame,Color.Purple);
+                aStarPathCalculator=pMapManager.buildPath(unit,path.get(0).getPosition(),Scout_module.SAFETY_LEVEL,unit.getType().isFlyer(),pGame,Color.Purple);
             } else if(microDestinationBlock!=null&&unit.getPosition().getDistance(microDestinationBlock.getPosition())>250) {
-                microPathCalculator=pMapManager.buildPath(unit,microDestinationBlock.getPosition(),1,unit.getType().isFlyer(),pGame,Color.Red);
+                microPathCalculator=pMapManager.buildPath(unit,microDestinationBlock.getPosition(),Scout_module.SAFETY_LEVEL,unit.getType().isFlyer(),pGame,Color.Red);
             } else if(microDestinationBlock!=null&&microDestinationBlock.isInPotentialField()||pMapManager.getaStarModule().getGridMap().getBlockMap()[microDestinationBlock.getRow()][microDestinationBlock.getColumn()].isInPotentialField()) {
                 microDestinationBlock=null;
                 micro(pMapManager,pGame);
@@ -320,14 +325,12 @@ public class ScoutingUnit {
         }
     }
 
-    private int UNIT_DANGERCHECK_FRAME_COUNT = 20;
-
     /**
      * Ak je v lokalnom dosahu nejake nebezpecenstvo, vrati prvu bezpecnu poziciu za nebezpecnou zonou
      * @return
      */
     public void localDangerCheck(MapManager pMapManager, Game pGame) {
-        if(pGame.getFrameCount()%UNIT_DANGERCHECK_FRAME_COUNT==0&&unit.exists()) {
+        if(pGame.getFrameCount()%Scout_module.UNIT_DANGERCHECK_FRAME_COUNT==0&&unit.exists()) {
             micro(pMapManager, pGame);
         }
     }
@@ -335,39 +338,6 @@ public class ScoutingUnit {
     public void removeFromPath(int pStartIndex, int pEndIndex) {
         for(int i=pStartIndex;i<=pEndIndex;i++) {
             path.remove(pStartIndex);
-        }
-    }
-
-    /* ------------------- Drawing functions ------------------- */
-
-    public void drawAll(Game pGame) {
-        if(unit.exists()) {
-            drawPath(pGame);
-            drawMicroPath(pGame);
-//            drawScoutingArea();
-        }
-    }
-
-//    public void drawScoutingArea() {
-//        if(scoutingArea!=null&&unit.exists()) {
-//            scoutingArea.drawScoutingArea();
-//        }
-//    }
-
-    public void drawPath(Game pGame) {
-        if(path!=null&&path.size()>0&&unit.exists()) {
-            for(Block b:path) {
-                pGame.drawCircleMap(b.getPosition(),5,Color.Green);
-                pGame.drawTextMap(b.getPosition().getX()+50,b.getPosition().getY(),b.getPosition().toString());
-            }
-        }
-    }
-
-    public void drawMicroPath(Game pGame) {
-        if(microPath!=null&&microPath.size()>0&&unit.exists()) {
-            for(Block b : microPath) {
-                pGame.drawCircleMap(b.getPosition(),5,Color.Red);
-            }
         }
     }
 
@@ -379,6 +349,38 @@ public class ScoutingUnit {
         return finishedOrder;
     }
 
+
+    /* ------------------- Drawing functions ------------------- */
+
+    public void drawAll(Game pGame) {
+        if(unit.exists()) {
+            drawPath(pGame);
+            drawMicroPath(pGame);
+            //drawScoutingArea();
+        }
+    }
+
+//    public void drawScoutingArea(GraphicsExtended graphicsEx) {
+//        if(scoutingArea!=null&&unit.isExists()) {
+//            scoutingArea.drawScoutingArea(graphicsEx);
+//        }
+//    }
+
+    public void drawPath(Game pGame) {
+        if(path!=null&&path.size()>0&&unit.exists()) {
+            for(Block b:path) {
+                pGame.drawCircleMap(b.getPosition(),5,b.getColor());
+            }
+        }
+    }
+
+    public void drawMicroPath(Game pGame) {
+        if(microPath!=null&&microPath.size()>0&&unit.exists()) {
+            for(Block b : microPath) {
+                pGame.drawCircleMap(b.getPosition(),5,b.getColor());
+            }
+        }
+    }
 
 
     /* ------------------- Getters and Setters ------------------- */
