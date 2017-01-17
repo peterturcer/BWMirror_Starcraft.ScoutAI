@@ -1,12 +1,18 @@
 package MapManager;
 
+import bwapi.Color;
 import bwapi.Game;
 import bwapi.Position;
+import bwapi.TilePosition;
 
 /**
  * Created by Chudjak Kristián on 05.01.2017.
  */
 public class HeatMap {
+    private int SIZE = TilePosition.SIZE_IN_PIXELS*GRIDTILESIZE;
+
+    public static final int GRIDTILESIZE = 8;
+
     public static boolean DEBUG=false;
 
     /**
@@ -34,9 +40,13 @@ public class HeatMap {
     /* ------------------- Initialization methods ------------------- */
 
     public void initializeHeatMap(int pRectangleSidePX, Game pGame) {
-        rows=pGame.mapHeight()/pRectangleSidePX;
+        /*rows=pGame.mapHeight()/pRectangleSidePX;
 
-        columns=pGame.mapWidth()/pRectangleSidePX;
+        columns=pGame.mapWidth()/pRectangleSidePX;*/
+
+        rows = pGame.mapWidth()/GRIDTILESIZE;
+        columns = pGame.mapHeight()/GRIDTILESIZE;
+
         fieldMap=new PotentialField[rows][columns];
 
         if(HeatMap.DEBUG) {
@@ -49,8 +59,9 @@ public class HeatMap {
         for(int i=0;i<rows;i++) {
             for(int j=0;j<columns;j++) {
                 //i a j su prehodene preto, lebo Block(x,y) - pre x zodpoveda hodnota column
-                fieldMap[i][j]=new PotentialField(pGame,new Position((pRectangleSidePX/2)+pRectangleSidePX*j,
-                        (pRectangleSidePX/2)+pRectangleSidePX*i),pRectangleSidePX,pRectangleSidePX,i,j);
+
+                fieldMap[i][j]=new PotentialField(pGame,new Position(i*SIZE,
+                        j*SIZE),SIZE,SIZE,i,j);
             }
         }
 //
@@ -106,7 +117,7 @@ public class HeatMap {
     public void heatManagement(Game pGame) {
         for(int i=0;i<rows;i++) {
             for(int j=0;j<columns;j++) {
-                if(pGame.isVisible(fieldMap[i][j].getPosition().getX(),fieldMap[i][j].getPosition().getY())) {
+                if(fieldMap[i][j].isVisible(pGame)) {
 
                     fieldMap[i][j].setHeat(0);
                 } else {
@@ -116,6 +127,21 @@ public class HeatMap {
         }
     }
 
+
+    public void drawHeatMap(Game pGame) {
+        for(int i=0;i<rows;i++) {
+            for(int j=0;j<columns;j++) {
+
+                if(fieldMap[i][j].getHeat() < 5){
+                    fieldMap[i][j].showGraphicsRectangular(pGame, Color.Blue);
+                }else if (fieldMap[i][j].getHeat() > 10){
+                    fieldMap[i][j].showGraphicsRectangular(pGame, Color.Red);
+                }else {
+                    fieldMap[i][j].showGraphicsRectangular(pGame, Color.Orange);
+                }
+            }
+        }
+    }
 
 
 
