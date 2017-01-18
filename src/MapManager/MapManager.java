@@ -108,7 +108,7 @@ public class MapManager {
     /* ------------------- initialising methods ------------------- */
 
     public void initializeAll() {
-//        initializeHeatMap(game);
+        initializeHeatMap(game);
         initializeEnemyBasePosition();
         initializeAStarModule(game);
 //        initializeScoutingAreas();
@@ -495,9 +495,13 @@ public class MapManager {
     public void drawAll() {
         drawBasePosition();
         drawExpansionPositions();
-//        drawHeatMap(game);
+        //drawHeatMap(game);
         drawDangerFields();
         drawDangerGrid();
+    }
+
+    private void drawHeatMap(Game game) {
+        heatMap.drawHeatMap(game);
     }
 
     /**

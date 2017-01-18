@@ -1,5 +1,6 @@
 package ScoutModule;
 
+import MODQlearning.QExecutor;
 import UnitManagement.*;
 import bwapi.*;
 import MapManager.*;
@@ -15,7 +16,7 @@ public class Scout_module {
 
     public static boolean DEBUG=true;
 
-    public static final int SAFETY_LEVEL=3;
+    public static final int SAFETY_LEVEL=2;
 
     public static final int MAP_REFRESH_FRAME_COUNT=15;
 
@@ -26,11 +27,15 @@ public class Scout_module {
     private MapManager mapManager;
     private ActionManager actionManager;
 
+    private QExecutor qexecutor;
+
     public Scout_module(Game pGame) {
         game=pGame;
         unitManager=new UnitManager(game);
         mapManager=new MapManager(game);
         actionManager=new ActionManager(mapManager,game);
+
+        qexecutor=new QExecutor(this);
     }
 
     public void onStart() {
@@ -52,10 +57,12 @@ public class Scout_module {
 
         manageAll();
         drawAll();
+        qexecutor.onFrame();
     }
 
     public void initializeModules() {
         mapManager.initializeAll();
+        qexecutor.initializeAll();
     }
 
     public void TEST_initializeAll() {
@@ -75,6 +82,7 @@ public class Scout_module {
     public void drawAll() {
         mapManager.drawAll();
         unitManager.drawAll();
+        qexecutor.drawAll();
     }
 
     public void manageAll() {
@@ -130,5 +138,13 @@ public class Scout_module {
 
     public void setActionManager(ActionManager actionManager) {
         this.actionManager = actionManager;
+    }
+
+    public QExecutor getQexecutor() {
+        return qexecutor;
+    }
+
+    public void setQexecutor(QExecutor qexecutor) {
+        this.qexecutor = qexecutor;
     }
 }
