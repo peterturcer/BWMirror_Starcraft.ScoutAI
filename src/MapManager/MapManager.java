@@ -224,12 +224,18 @@ public class MapManager {
     }
 
     public void initializeEnemyBasePosition() {
-        for(BaseLocation b:BWTA.getStartLocations()) {
-            if(b.isStartLocation()&&!game.isVisible(b.getTilePosition())) {
-                enemyBasePosition=new PotentialField(game,b.getTilePosition().getX()*TilePosition.SIZE_IN_PIXELS,b.getTilePosition().getY()*TilePosition.SIZE_IN_PIXELS,150);
+        List<TilePosition> startPositions=game.getStartLocations();
+        for(TilePosition tp: startPositions) {
+            if(!game.isVisible(tp)) {
+                enemyBasePosition=new PotentialField(game,tp.getX()*TilePosition.SIZE_IN_PIXELS,tp.getY()*TilePosition.SIZE_IN_PIXELS,150);
             }
         }
-
+//        List<BaseLocation> bases=BWTA.getStartLocations();
+//        for(BaseLocation b:bases) {
+//            if(b.isStartLocation()&&!game.isVisible(b.getTilePosition())) {
+//                enemyBasePosition=new PotentialField(game,b.getTilePosition().getX()*TilePosition.SIZE_IN_PIXELS,b.getTilePosition().getY()*TilePosition.SIZE_IN_PIXELS,150);
+//            }
+//        }
     }
 
     public void initializeHeatMap(Game game) {
