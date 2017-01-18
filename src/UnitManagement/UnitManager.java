@@ -189,6 +189,10 @@ public class UnitManager {
         scoutingUnits.add(new ScoutingUnit(unit));
     }
 
+    public void addScoutingUnit(ScoutingUnit pScoutingUnit) {
+        scoutingUnits.add(pScoutingUnit);
+    }
+
     public void addSelectedUnit() {
         for(Unit u: game.getSelectedUnits()) {
             if(u.canMove()) {
