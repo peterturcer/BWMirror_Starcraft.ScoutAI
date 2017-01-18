@@ -8,8 +8,8 @@ import java.util.HashMap;
 public class Qlearning {
 
 
-    private final double alpha = 0.1;
-    private final double gamma = 0.9;
+    private final double alpha = 0.1; // learning rate  0 - no learning
+    private final double gamma = 0.9; // discount factor (importance of future rewards) 0 - only-short sighted
 
     private State states[];
     private Action actions[];
@@ -25,6 +25,9 @@ public class Qlearning {
         this.states = states;
         this.actions = actions;
 
+
+
+
         if (qMatrix != null && qMatrix.length == states.length && qMatrix[0].length == actions.length) {
             this.qMatrix = qMatrix;
         } else {
@@ -32,14 +35,15 @@ public class Qlearning {
         }
 
         buildIndices();
-
     }
 
 
     public void buildIndices() {
+
         for (int i = 0; i < states.length; i++) {
             stateIndices.put(states[i], i);
         }
+
         for (int i = 0; i < actions.length; i++) {
             actionIndices.put(actions[i], i);
         }
@@ -62,7 +66,8 @@ public class Qlearning {
     }
 
 
-    public void experience(State currentState, Action action, State nextState, double reward) {
+    public void experience(State currentState, Action action, State nextState) {
+
         int currentStateIndex = stateIndices.get(currentState);
         int nextStateIndex = stateIndices.get(nextState);
         int actionIndex = actionIndices.get(action);
