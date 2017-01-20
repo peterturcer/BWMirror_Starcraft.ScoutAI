@@ -17,6 +17,7 @@ public class TaskManager {
     private List<Task> tasks;
 
     private void orderTasksForOptimalValue(ScoutingUnit unit) {
+        /* ToDo: calculateTravelTime by mala byt funkcia MapManagera. V UnitManageri som ju ani nenasiel
         if (tasks.isEmpty()) {
             return;
         }
@@ -36,6 +37,7 @@ public class TaskManager {
                 tasks = permutation;
             }
         }
+        */
     }
 
     public static List<List<Task>> listPermutations(List<Task> elementsList) {

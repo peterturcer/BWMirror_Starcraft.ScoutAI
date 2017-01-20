@@ -47,24 +47,11 @@ public class GridMap {
             System.out.println("     - Map Y = "+pGame.mapHeight()*TilePosition.SIZE_IN_PIXELS+" ,Grid cols = "+columns);
         }
 
-        //List<Polygon> unwalkablePolygons=BWTA.getUnwalkablePolygons();
-
         for(int i=0;i<rows;i++) {
             for(int j=0;j<columns;j++) {
 
                 Block b=new Block(new Position((rectangleSidePX/2)+rectangleSidePX*j,(rectangleSidePX/2)+rectangleSidePX*i),rectangleSidePX,i,j,pGame);
-
-                /* Nastavenie "walkable" atributu Blocku, zatial nefunguje
-                for(Polygon pol:unwalkablePolygons) {
-                    if(pol.isInside(b.getPosition())) {
-                        b.setAccessibleByGround(false);
-                    } else {
-                        b.setAccessibleByGround(true);
-                    }
-                }
-                */
-
-                b.setAccessibleByGround(true); //ToDo: game.isWalkable() funkcia nefunguje, neviem preco, stale dava false
+                b.setAccessibleByGround(pGame.isWalkable(b.getPosition().getX()/8,b.getPosition().getY()/8));
                 blockMap[i][j]=b;
             }
         }

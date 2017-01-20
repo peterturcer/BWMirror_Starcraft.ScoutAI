@@ -1,33 +1,47 @@
-19.1.2017 12:45:42 8732 Logging started
-19.1.2017 12:45:42 8732 Already running
-19.1.2017 12:45:42 8732 Logging ended
-19.1.2017 12:45:45 8956 Startbutton
-19.1.2017 12:45:45 8956 Starting Game Starcraft 1.16.1 D:\Games\Starcraft No Install\StarCraft.exe
-19.1.2017 12:45:45 8956 BWAPI 4.1.2 Injector [RELEASE] Version  Compatible
-19.1.2017 12:45:45 8956 W-MODE 1.02 Version 1.0.2 Compatible
-19.1.2017 12:45:45 8956 Obtained DebugPrivilege
-19.1.2017 12:45:45 8956 CreateProcess
-19.1.2017 12:45:45 8956 Call ScSuspended for all active Plugins
-19.1.2017 12:45:45 8956 ApplyPatchSuspended for BWAPI 4.1.2 Injector [RELEASE]
-19.1.2017 12:45:45 8956 ApplyPatchSuspended for W-MODE 1.02
-19.1.2017 12:45:45 8956 ResumeThread
-19.1.2017 12:45:45 8956 WaitForInputIdle
-19.1.2017 12:45:45 8956 Call ScWindowCreated for all active Plugins
-19.1.2017 12:45:45 8956 ApplyPatch for BWAPI 4.1.2 Injector [RELEASE]
-19.1.2017 12:45:45 8956 ApplyPatch for W-MODE 1.02
-19.1.2017 12:45:45 8956 Starting Starcraft completed
-19.1.2017 14:31:02 8956 Startbutton
-19.1.2017 14:31:02 8956 Starting Game Starcraft 1.16.1 D:\Games\Starcraft No Install\StarCraft.exe
-19.1.2017 14:31:02 8956 BWAPI 4.1.2 Injector [RELEASE] Version  Compatible
-19.1.2017 14:31:02 8956 W-MODE 1.02 Version 1.0.2 Compatible
-19.1.2017 14:31:02 8956 Obtained DebugPrivilege
-19.1.2017 14:31:02 8956 CreateProcess
-19.1.2017 14:31:02 8956 Call ScSuspended for all active Plugins
-19.1.2017 14:31:02 8956 ApplyPatchSuspended for BWAPI 4.1.2 Injector [RELEASE]
-19.1.2017 14:31:02 8956 ApplyPatchSuspended for W-MODE 1.02
-19.1.2017 14:31:02 8956 ResumeThread
-19.1.2017 14:31:02 8956 WaitForInputIdle
-19.1.2017 14:31:02 8956 Call ScWindowCreated for all active Plugins
-19.1.2017 14:31:02 8956 ApplyPatch for BWAPI 4.1.2 Injector [RELEASE]
-19.1.2017 14:31:02 8956 ApplyPatch for W-MODE 1.02
-19.1.2017 14:31:02 8956 Starting Starcraft completed
+20.01.2017 11:08:05 8132 Logging started
+20.01.2017 11:08:05 8132 Begin Startup
+20.01.2017 11:08:05 8132 Chaosauncher 0.5.4.4 on NT 6.2.9200  at D:\Projects\School\Programming\BWMirror_Starcraft.ScoutAI\BWAPI\Chaoslauncher\Chaoslauncher.exe
+20.01.2017 11:08:05 8132 Load Settings
+20.01.2017 11:08:05 8132 GamePath: D:\Installs\Games_inst\Starcraft No Install\
+20.01.2017 11:08:05 8132 Load Plugins
+20.01.2017 11:08:05 8132 AdvLoaderPluginPath: \Plugins\
+20.01.2017 11:08:05 8132 Loading BWL4-Plugin D:\Projects\School\Programming\BWMirror_Starcraft.ScoutAI\BWAPI\Chaoslauncher\iccscbn.icc
+20.01.2017 11:08:05 8132 Plugin loaded ICCup
+20.01.2017 11:08:05 8132 Loading BWL4-Plugin D:\Projects\School\Programming\BWMirror_Starcraft.ScoutAI\BWAPI\Chaoslauncher\Plugins\APMAlert.bwl
+20.01.2017 11:08:05 8132 Plugin loaded APMAlert (1.16.1)
+20.01.2017 11:08:05 8132 Loading BWL4-Plugin D:\Projects\School\Programming\BWMirror_Starcraft.ScoutAI\BWAPI\Chaoslauncher\Plugins\BWAPI_PluginInjector.bwl
+20.01.2017 11:08:05 8132 Plugin loaded BWAPI 4.1.2 Injector [RELEASE]
+20.01.2017 11:08:05 8132 Loading BWL4-Plugin D:\Projects\School\Programming\BWMirror_Starcraft.ScoutAI\BWAPI\Chaoslauncher\Plugins\Chaosplugin.bwl
+20.01.2017 11:08:05 8132 Plugin loaded Chaosplugin for 1.16.1
+20.01.2017 11:08:05 8132 Loading BWL4-Plugin D:\Projects\School\Programming\BWMirror_Starcraft.ScoutAI\BWAPI\Chaoslauncher\Plugins\LatencyChanger.bwl
+20.01.2017 11:08:05 8132 Plugin loaded LatencyChanger for 1.16.1
+20.01.2017 11:08:05 8132 Loading BWL4-Plugin D:\Projects\School\Programming\BWMirror_Starcraft.ScoutAI\BWAPI\Chaoslauncher\Plugins\repfix.bwl
+20.01.2017 11:08:05 8132 Plugin loaded RepFix
+20.01.2017 11:08:05 8132 Loading BWL4-Plugin D:\Projects\School\Programming\BWMirror_Starcraft.ScoutAI\BWAPI\Chaoslauncher\Plugins\RWAPlayer.bwl
+20.01.2017 11:08:06 8132 Plugin loaded RWAPlayer (1.16.1)
+20.01.2017 11:08:06 8132 Loading BWL4-Plugin D:\Projects\School\Programming\BWMirror_Starcraft.ScoutAI\BWAPI\Chaoslauncher\Plugins\RWARecorder.bwl
+20.01.2017 11:08:06 8132 Plugin loaded RWARecorder (1.16.1)
+20.01.2017 11:08:06 8132 Loading BWL4-Plugin D:\Projects\School\Programming\BWMirror_Starcraft.ScoutAI\BWAPI\Chaoslauncher\Plugins\Stormplugin.bwl
+20.01.2017 11:08:06 8132 Plugin loaded Stormplugin for 1.16.1
+20.01.2017 11:08:06 8132 Loading BWL4-Plugin D:\Projects\School\Programming\BWMirror_Starcraft.ScoutAI\BWAPI\Chaoslauncher\Plugins\wmode.bwl
+20.01.2017 11:08:06 8132 Plugin loaded W-MODE 1.02
+20.01.2017 11:08:06 8132 Load Tools
+20.01.2017 11:08:06 8132 Init GUI
+20.01.2017 11:08:06 8132 Get Starcraftversions
+20.01.2017 11:08:06 8132 Init complete
+20.01.2017 11:15:23 8132 Startbutton
+20.01.2017 11:15:23 8132 Starting Game Starcraft 1.16.1 D:\Installs\Games_inst\Starcraft No Install\StarCraft.exe
+20.01.2017 11:15:23 8132 BWAPI 4.1.2 Injector [RELEASE] Version  Compatible
+20.01.2017 11:15:23 8132 W-MODE 1.02 Version 1.0.2 Compatible
+20.01.2017 11:15:23 8132 Could not obtain SeDebugPrivilege Not all privileges or groups referenced are assigned to the caller.
+(1300)
+20.01.2017 11:15:24 8132 CreateProcess
+20.01.2017 11:15:24 8132 Call ScSuspended for all active Plugins
+20.01.2017 11:15:24 8132 ApplyPatchSuspended for BWAPI 4.1.2 Injector [RELEASE]
+20.01.2017 11:15:24 8132 ApplyPatchSuspended for W-MODE 1.02
+20.01.2017 11:15:24 8132 ResumeThread
+20.01.2017 11:15:24 8132 WaitForInputIdle
+20.01.2017 11:15:25 8132 Call ScWindowCreated for all active Plugins
+20.01.2017 11:15:25 8132 ApplyPatch for BWAPI 4.1.2 Injector [RELEASE]
+20.01.2017 11:15:25 8132 ApplyPatch for W-MODE 1.02
+20.01.2017 11:15:25 8132 Starting Starcraft completed
