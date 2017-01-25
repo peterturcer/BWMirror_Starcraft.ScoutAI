@@ -3,7 +3,6 @@ package MODQlearning;
 import ScoutModule.Scout_module;
 import UnitManagement.ScoutingUnit;
 import bwapi.*;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -50,6 +49,7 @@ public class QExecutor {
     private List<ScoutingUnit> scoutingUnits;
 
     private int execFrameCount=0;
+
 
     public QExecutor(Scout_module pScout_module) {
         scout_module=pScout_module;

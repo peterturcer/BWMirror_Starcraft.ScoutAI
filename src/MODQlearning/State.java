@@ -6,12 +6,22 @@ package MODQlearning;
 public class State {
 
 
-    private int index;
+    private String hashCode;
+    private int life;
+    private int distance;
+    private int danger;
 
-    public State()
-    {}
 
-    public int getIndex() {
-        return index;
+    public State(String paHashCode, int paLife, int paDistance, int paDanger)
+    {
+        this.hashCode = paHashCode;
+        this.life = paLife;
+        this.distance = paDistance;
+        this.danger = paDanger;
     }
+
+    public int getHashCode() {
+        return hashCode.hashCode();
+    }
+
 }

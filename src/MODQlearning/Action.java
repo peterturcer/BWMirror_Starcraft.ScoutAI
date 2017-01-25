@@ -5,12 +5,7 @@ package MODQlearning;
  */
 public class Action {
 
-    private int index;
-
     public Action()
     {}
 
-    public int getIndex() {
-        return index;
-    }
 }

@@ -7,7 +7,6 @@ import java.util.HashMap;
  */
 public class Qlearning {
 
-
     private final double alpha = 0.1; // learning rate  0 - no learning
     private final double gamma = 0.9; // discount factor (importance of future rewards) 0 - only-short sighted
 
@@ -15,7 +14,6 @@ public class Qlearning {
     private Action actions[];
 
     private double[][] qMatrix;
-    private double[][] rewardMatrix;
 
     private HashMap<State, Integer> stateIndices = new HashMap<>();
     private HashMap<Action, Integer> actionIndices = new HashMap<>();
@@ -24,9 +22,6 @@ public class Qlearning {
     {
         this.states = states;
         this.actions = actions;
-
-
-
 
         if (qMatrix != null && qMatrix.length == states.length && qMatrix[0].length == actions.length) {
             this.qMatrix = qMatrix;
@@ -54,8 +49,6 @@ public class Qlearning {
     }
 
 
-
-    // TODO Optimize, maybe not needed every time, use some kind of caching and invalidation for states.
     public double maxQ(int stateIndex) {
         double maxValue = Double.MIN_VALUE;
 
@@ -66,15 +59,14 @@ public class Qlearning {
     }
 
 
-    public void experience(State currentState, Action action, State nextState) {
+    public void experience(State currentState, Action action, State nextState, double paReward) {
 
         int currentStateIndex = stateIndices.get(currentState);
         int nextStateIndex = stateIndices.get(nextState);
         int actionIndex = actionIndices.get(action);
 
-        // Using this possible action, consider to go to the next state
         double q = qMatrix[currentStateIndex][actionIndex];
-        double r = rewardMatrix[currentState.getIndex()][action.getIndex()];
+        double r = paReward;
 
         double maxQ = maxQ(nextStateIndex);
 
@@ -83,4 +75,7 @@ public class Qlearning {
         qMatrix[currentStateIndex][actionIndex] = value;
     }
 
+       public double[][] getQMatrix() {
+        return qMatrix;
+    }
 }
