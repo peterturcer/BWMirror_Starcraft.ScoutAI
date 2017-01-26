@@ -1,11 +1,13 @@
 package MODQlearning;
 
+import pers.FileIO;
+
 import java.util.HashMap;
 
 /**
  * Created by Peter on 7. 1. 2017.
  */
-public class Qlearning {
+public class QLearning {
 
     private final double alpha = 0.1; // learning rate  0 - no learning
     private final double gamma = 0.9; // discount factor (importance of future rewards) 0 - only-short sighted
@@ -18,18 +20,56 @@ public class Qlearning {
     private HashMap<State, Integer> stateIndices = new HashMap<>();
     private HashMap<Action, Integer> actionIndices = new HashMap<>();
 
-    public Qlearning(State[] states, Action[] actions, double[][] qMatrix)
-    {
-        this.states = states;
-        this.actions = actions;
+    private FileIO qMatrixFile;
 
-        if (qMatrix != null && qMatrix.length == states.length && qMatrix[0].length == actions.length) {
-            this.qMatrix = qMatrix;
+    public QLearning() {
+        initializeStates();
+        initializeActions();
+        onStart();
+
+        if (qMatrixFile.loadFromFile() != null && qMatrixFile.loadFromFile().length == states.length && qMatrixFile.loadFromFile()[0].length == actions.length) {
+            this.qMatrix = qMatrixFile.loadFromFile();
         } else {
             buildMatrix();
         }
 
         buildIndices();
+    }
+
+    public QLearning(State[] states, Action[] actions, double[][] qMatrixFromFile)
+    {
+        this.states = states;
+        this.actions = actions;
+
+        if (qMatrixFromFile != null && qMatrixFromFile.length == states.length && qMatrixFromFile[0].length == actions.length) {
+            this.qMatrix = qMatrixFromFile;
+        } else {
+            buildMatrix();
+        }
+
+        buildIndices();
+    }
+
+    public void initializeStates() {
+        states = MatrixBuilder.build();
+    }
+
+    public void initializeActions() {
+        actions = new Action[]
+                {
+                   /* new RunAction(),
+                    new AttackNearestAction(),
+                    new DoNothingAction(),
+                    new FleeFromEnemyAction()*/
+                };
+    }
+
+    public void onStart() {
+        qMatrixFile = new FileIO("qMatrix.txt");
+    }
+
+    public void onEnd() {
+        qMatrixFile.saveToFile(getQMatrix());
     }
 
 

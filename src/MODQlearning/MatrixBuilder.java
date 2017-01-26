@@ -14,14 +14,22 @@ public class MatrixBuilder {
         String code = "";
 
 
-        for (int life = 0; life < 3; life++) {
-            for (int danger = 0; danger < 3; danger++) {
-                for (int distance = 0; distance < 3; distance++){
-
-                    code = life + danger + distance + "";
-                    result.add(new State(code,life,danger,distance));
-            }}}
-
+        for (int HP = 0; HP < 3; HP++) {
+            for (int safePathDistance = 0; safePathDistance < 3; safePathDistance++) {
+                for (int normalPathDistance = 0; normalPathDistance < 3; normalPathDistance++){
+                    for (int riskPathDistance = 0; riskPathDistance < 3; riskPathDistance++) {
+                        for (int safePathDanger = 0; safePathDanger < 3; safePathDanger++) {
+                            for (int normalPathDanger = 0; normalPathDanger < 3; normalPathDanger++) {
+                                for (int riskPathDanger = 0; riskPathDanger < 3; riskPathDanger++) {
+                                    code =""+ HP + safePathDistance + normalPathDistance + riskPathDistance + safePathDanger + normalPathDanger + riskPathDanger;
+                                    result.add(new State(code,HP,safePathDistance,normalPathDistance,riskPathDistance,safePathDanger,normalPathDanger,riskPathDanger));
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
 
         State[] ar = new State[result.size()];
 

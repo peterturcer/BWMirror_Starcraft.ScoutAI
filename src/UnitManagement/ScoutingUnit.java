@@ -7,6 +7,7 @@ import ScoutModule.Scout_module;
 import bwapi.Color;
 import bwapi.Game;
 import bwapi.Unit;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.ArrayList;
 
@@ -32,7 +33,11 @@ public class ScoutingUnit {
 
     private ScoutingArea scoutingArea;
 
-    private ArrayList<Block> microPath;
+    private ArrayList<Block> safeMicroPath;
+
+    private ArrayList<Block> normalMicroPath;
+
+    private ArrayList<Block> riskMicroPath;
 
     private boolean hasOrder;
 
@@ -49,7 +54,7 @@ public class ScoutingUnit {
 
     public ScoutingUnit(Unit pUnit) {
         path=new ArrayList<>();
-        microPath=new ArrayList<>();
+        safeMicroPath =new ArrayList<>();
         unit=pUnit;
         hasOrder=false;
         finishedOrder=true;
@@ -75,7 +80,7 @@ public class ScoutingUnit {
     /* ------------------- real-time management methods ------------------- */
 
     public void enemyDetected(Unit pUnit, MapManager pMapManager, Game pGame) {
-        //do podmienky      microPathCalculator==null&&microPath.isEmpty()&&
+        //do podmienky      microPathCalculator==null&&safeMicroPath.isEmpty()&&
         if(unit.getPosition().getDistance(pUnit.getPosition())<unit.getType().sightRange()+pUnit.getType().sightRange()) {
             pMapManager.refreshMap(pGame);
             for(Block b:path) {
@@ -109,7 +114,7 @@ public class ScoutingUnit {
         if(aStarPathCalculator!=null) {
             if(aStarPathCalculator.finished) {
                 microDestinationBlock=null;
-                microPath=new ArrayList<>();
+                safeMicroPath =new ArrayList<>();
                 path=aStarPathCalculator.getBlockPathArray();
                 if(path==null) {
                     System.out.println("Zmierni podmienky");
@@ -125,9 +130,9 @@ public class ScoutingUnit {
         if(microPathCalculator!=null) {
             if(microPathCalculator.finished) {
                 if(microPathCalculator.getBlockPathArray()!=null) {
-                    microPath = microPathCalculator.getBlockPathArray();
+                    safeMicroPath = microPathCalculator.getBlockPathArray();
                     for (int i = 0; i < 3; i++) {
-                        microPath.remove(microPath.size() - 1);
+                        safeMicroPath.remove(safeMicroPath.size() - 1);
                     }
                 }
                 microPathCalculator = null;
@@ -136,7 +141,7 @@ public class ScoutingUnit {
     }
 
     public void manageMovement() {
-        if(!microPath.isEmpty()&&path.isEmpty()) {
+        if(!safeMicroPath.isEmpty()&&path.isEmpty()) {
             manageMicroPath();
         } else {
             managePath();
@@ -144,11 +149,11 @@ public class ScoutingUnit {
     }
 
     public void manageMicroPath() {
-        if(microPath.size()>0) {
+        if(safeMicroPath.size()>0) {
             hasOrder=true;
-            if(unit.getPosition().getDistance(microPath.get(microPath.size()-1).getPosition())<90) {
-                unit.move(microPath.get(microPath.size() - 1).getPosition(), false);
-                microPath.remove(microPath.size() - 1);
+            if(unit.getPosition().getDistance(safeMicroPath.get(safeMicroPath.size()-1).getPosition())<90) {
+                unit.move(safeMicroPath.get(safeMicroPath.size() - 1).getPosition(), false);
+                safeMicroPath.remove(safeMicroPath.size() - 1);
             }
         }
     }
@@ -171,8 +176,8 @@ public class ScoutingUnit {
     }
 
     public void manageIdle() {
-        if(microPath.size()>0&&unit.isIdle()) {
-            unit.rightClick(microPath.get(microPath.size()-1).getPosition(),false);
+        if(safeMicroPath.size()>0&&unit.isIdle()) {
+            unit.rightClick(safeMicroPath.get(safeMicroPath.size()-1).getPosition(),false);
         } else if(path.size()>0&&unit.isIdle()) {
             unit.rightClick(path.get(path.size()-1).getPosition(),false);
         }
@@ -182,7 +187,7 @@ public class ScoutingUnit {
         if(hasOrder&&path!=null) {
             if(unit.getPosition().getDistance(path.get(0).getPosition())<100) {
                 path=new ArrayList<>();
-                microPath=new ArrayList<>();
+                safeMicroPath =new ArrayList<>();
                 finishedOrder=true;
                 hasOrder=false;
             }
@@ -211,6 +216,30 @@ public class ScoutingUnit {
 
 
     /* ------------------- other methods ------------------- */
+
+    public double getSafePathDistanceRatio() {
+        throw new NotImplementedException();
+    }
+
+    public double getNormalPathDistanceRatio() {
+        throw new NotImplementedException();
+    }
+
+    public double getRiskPathDistanceRatio() {
+        throw new NotImplementedException();
+    }
+
+    public double getSafePathDangerRatio() {
+        throw new NotImplementedException();
+    }
+
+    public double getNormalPathDangerRatio() {
+        throw new NotImplementedException();
+    }
+
+    public double getRiskPathDangerRatio() {
+        throw new NotImplementedException();
+    }
 
     public void scoutingAreaTEST(MapManager pMapManager, Game pGame) {
 
@@ -314,7 +343,7 @@ public class ScoutingUnit {
             }
             if(interruptMicro&&!unit.isUnderAttack()) {
                 microDestinationBlock=null;
-                microPath=new ArrayList<>();
+                safeMicroPath =new ArrayList<>();
                 aStarPathCalculator=pMapManager.buildPath(unit,path.get(0).getPosition(),safety_level,unit.getType().isFlyer(),pGame,Color.Purple);
             } else if(microDestinationBlock!=null&&unit.getPosition().getDistance(microDestinationBlock.getPosition())>250) {
                 microPathCalculator=pMapManager.buildPath(unit,microDestinationBlock.getPosition(),safety_level,unit.getType().isFlyer(),pGame,Color.Red);
@@ -377,8 +406,8 @@ public class ScoutingUnit {
     }
 
     public void drawMicroPath(Game pGame) {
-        if(microPath!=null&&microPath.size()>0&&unit.exists()) {
-            for(Block b : microPath) {
+        if(safeMicroPath !=null&& safeMicroPath.size()>0&&unit.exists()) {
+            for(Block b : safeMicroPath) {
                 pGame.drawCircleMap(b.getPosition(),5,b.getColor());
             }
         }
@@ -403,12 +432,12 @@ public class ScoutingUnit {
         this.hasTask = hasTask;
     }
 
-    public ArrayList<Block> getMicroPath() {
-        return microPath;
+    public ArrayList<Block> getSafeMicroPath() {
+        return safeMicroPath;
     }
 
-    public void setMicroPath(ArrayList<Block> microPath) {
-        this.microPath = microPath;
+    public void setSafeMicroPath(ArrayList<Block> safeMicroPath) {
+        this.safeMicroPath = safeMicroPath;
     }
 
     public ScoutingArea getScoutingArea() {

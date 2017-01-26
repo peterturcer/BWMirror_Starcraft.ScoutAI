@@ -1,7 +1,6 @@
 import MODQlearning.*;
 import ScoutModule.Scout_module;
 import bwapi.*;
-import pers.FileIO;
 
 /**
  * Created by Silent1 on 25.10.2016.
@@ -15,18 +14,8 @@ public class Bot extends DefaultBWListener {
     Scout_module scout;
     ConsoleHandler consoleHandler;
 
-    private FileIO qMatrixFile;
-    private Qlearning learning;
+    private QLearning learning;
     private ScoutController scoutController;
-    private State[] states = MatrixBuilder.build();
-
-    private Action[] actions = new Action[]
-            {
-                   /* new RunAction(),
-                    new AttackNearestAction(),
-                    new DoNothingAction(),
-                    new FleeFromEnemyAction()*/
-            };
 
     public static void main(String[] args) {
         new Bot().run();
@@ -62,8 +51,7 @@ public class Bot extends DefaultBWListener {
         game.setLocalSpeed(30);
         game.enableFlag(1);
 
-        qMatrixFile = new FileIO("qMatrix.txt");
-        learning = new Qlearning(states, actions, qMatrixFile.loadFromFile());
+        learning = new QLearning();
 
         System.out.println("ScoutAI bot working.");
     }
@@ -71,20 +59,18 @@ public class Bot extends DefaultBWListener {
     @Override
     public void onEnd(boolean b) {
         super.onEnd(b);
-        qMatrixFile.saveToFile(learning.getQMatrix());
+        learning.onEnd();
     }
 
     @Override
     public void onFrame() {
         super.onFrame();
-
         scout.onFrame();
     }
 
     @Override
     public void onSendText(String s) {
         super.onSendText(s);
-
         consoleHandler.messageHandler(s);
     }
 
