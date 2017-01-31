@@ -1,5 +1,6 @@
 package MODQlearning;
 
+import UnitManagement.ScoutingUnit;
 import pers.FileIO;
 
 import java.util.HashMap;
@@ -36,20 +37,6 @@ public class QLearning {
         buildIndices();
     }
 
-    public QLearning(State[] states, Action[] actions, double[][] qMatrixFromFile)
-    {
-        this.states = states;
-        this.actions = actions;
-
-        if (qMatrixFromFile != null && qMatrixFromFile.length == states.length && qMatrixFromFile[0].length == actions.length) {
-            this.qMatrix = qMatrixFromFile;
-        } else {
-            buildMatrix();
-        }
-
-        buildIndices();
-    }
-
     public void initializeStates() {
         states = MatrixBuilder.build();
     }
@@ -57,10 +44,9 @@ public class QLearning {
     public void initializeActions() {
         actions = new Action[]
                 {
-                   /* new RunAction(),
-                    new AttackNearestAction(),
-                    new DoNothingAction(),
-                    new FleeFromEnemyAction()*/
+                    new Action(1),
+                    new Action(2),
+                    new Action(3)
                 };
     }
 
@@ -117,5 +103,61 @@ public class QLearning {
 
        public double[][] getQMatrix() {
         return qMatrix;
+    }
+
+    public double getAlpha() {
+        return alpha;
+    }
+
+    public double getGamma() {
+        return gamma;
+    }
+
+    public State[] getStates() {
+        return states;
+    }
+
+    public void setStates(State[] states) {
+        this.states = states;
+    }
+
+    public Action[] getActions() {
+        return actions;
+    }
+
+    public void setActions(Action[] actions) {
+        this.actions = actions;
+    }
+
+    public double[][] getqMatrix() {
+        return qMatrix;
+    }
+
+    public void setqMatrix(double[][] qMatrix) {
+        this.qMatrix = qMatrix;
+    }
+
+    public HashMap<State, Integer> getStateIndices() {
+        return stateIndices;
+    }
+
+    public void setStateIndices(HashMap<State, Integer> stateIndices) {
+        this.stateIndices = stateIndices;
+    }
+
+    public HashMap<Action, Integer> getActionIndices() {
+        return actionIndices;
+    }
+
+    public void setActionIndices(HashMap<Action, Integer> actionIndices) {
+        this.actionIndices = actionIndices;
+    }
+
+    public FileIO getqMatrixFile() {
+        return qMatrixFile;
+    }
+
+    public void setqMatrixFile(FileIO qMatrixFile) {
+        this.qMatrixFile = qMatrixFile;
     }
 }

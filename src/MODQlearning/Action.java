@@ -5,7 +5,11 @@ package MODQlearning;
  */
 public class Action {
 
-    public Action()
-    {}
+    private int safetyLevel;
+
+    public Action(int pSafetyLevel)
+    {
+        safetyLevel=pSafetyLevel;
+    }
 
 }
