@@ -14,7 +14,6 @@ public class QExecutor {
 
     public static boolean DEBUG=true;
     public static boolean EXECUTE=false;
-    public static int EXEC_DELAY=50;
 
     /* Q-learning */
     private Scout_module scout_module;
@@ -25,7 +24,8 @@ public class QExecutor {
     private int startState = 0;
     private ScoutingUnit actualScoutingUnit;
     private boolean running=false;
-    private boolean nextScenario=false;
+    private boolean nextScenario=true;
+    private int nextUnit=1;
 
     private int reward;
     /* Q-learning */
@@ -70,43 +70,40 @@ public class QExecutor {
         reward=2000;
     }
 
-    public void executeQLearning() {
-        selectScoutingUnit(scUnit_1);
-        execute_1();
-    }
-
     public void resetQLearning(ScoutingUnit pScoutingUnit) {
         reward=2000;                                                                                                        // Reset reward
         qlearning.loadMatrixIO();                                                                                           // New initialization of QMatrix from file
         running=false;
-
     }
 
     public void onFrame() {
 
         /* type `qrun` into chat */
         if(QExecutor.EXECUTE) {
-            running=true;
-            QExecutor.EXECUTE=false;
-        }
 
-        executeAll();
+            executeAll();
 
-        if(running) {
-            decrementReward();
-        }
+            if(running) {
+                decrementReward();
+            }
 
         /* update every XX frames, when scoutingUnit is ready */
-        if(actualScoutingUnit.isReadyForQLearning()) {
-            update();
-        }
+            if(actualScoutingUnit.isReadyForQLearning()) {
+                update();
+            }
 
         /* when scoutingUnit finished learning */
-        if(finishedLearning()) {
-            updateOnEnd();
-            qlearning.saveMatrixIO();                                                                                       // Save QMatrix
-            nextScenario=true;
+            if(finishedLearning()) {
+                if(running) {
+                    updateOnEnd();
+                    qlearning.saveMatrixIO();// Save QMatrix
+                    running=false;
+                    nextUnit++;
+                    nextScenario=true;
+                }
+            }
         }
+
     }
 
     public boolean finishedLearning() {
@@ -255,35 +252,83 @@ public class QExecutor {
 
     // ToDo - prerobim aby si sam zvolil dalsiu jednotku
     public void executeAll() {
-        if(QExecutor.EXECUTE) {
+        if(!running) {
             if(nextScenario) {
-                resetQLearning(scUnit_1);
-                execute_1();
-                nextScenario=false;
-            } else if(game.getFrameCount()==execFrameCount+EXEC_DELAY*2) {
-                execute_2();
-            } else if(game.getFrameCount()==execFrameCount+EXEC_DELAY*3) {
-                execute_3();
-            } else if(game.getFrameCount()==execFrameCount+EXEC_DELAY*4) {
-                execute_4();
-            } else if(game.getFrameCount()==execFrameCount+EXEC_DELAY*5) {
-                execute_5();
-            } else if(game.getFrameCount()==execFrameCount+EXEC_DELAY*6) {
-                execute_6();
-            } else if(game.getFrameCount()==execFrameCount+EXEC_DELAY*7) {
-                execute_7();
-            } else if(game.getFrameCount()==execFrameCount+EXEC_DELAY*8) {
-                execute_8();
-            } else if(game.getFrameCount()==execFrameCount+EXEC_DELAY*9) {
-                execute_9();
-            } else if(game.getFrameCount()==execFrameCount+EXEC_DELAY*10) {
-                execute_10();
-            } else if(game.getFrameCount()==execFrameCount+EXEC_DELAY*11) {
-                execute_11();
-            } else if(game.getFrameCount()==execFrameCount+EXEC_DELAY*12) {
-                execute_12();
+                switch (nextUnit) {
+                    case 1:
+                        resetQLearning(scUnit_1);
+                        execute_1();
+                        running = true;
+                        nextScenario = false;
+                        break;
+                    case 2:
+                        resetQLearning(scUnit_2);
+                        execute_2();
+                        running = true;
+                        nextScenario = false;
+                        break;
+                    case 3:
+                        resetQLearning(scUnit_3);
+                        execute_3();
+                        running = true;
+                        nextScenario = false;
+                        break;
+                    case 4:
+                        resetQLearning(scUnit_4);
+                        execute_4();
+                        running = true;
+                        nextScenario = false;
+                        break;
+                    case 5:
+                        resetQLearning(scUnit_5);
+                        execute_5();
+                        running = true;
+                        nextScenario = false;
+                        break;
+                    case 6:
+                        resetQLearning(scUnit_6);
+                        execute_6();
+                        running = true;
+                        nextScenario = false;
+                        break;
+                    case 7:
+                        resetQLearning(scUnit_7);
+                        execute_7();
+                        running = true;
+                        nextScenario = false;
+                        break;
+                    case 8:
+                        resetQLearning(scUnit_8);
+                        execute_8();
+                        running = true;
+                        nextScenario = false;
+                        break;
+                    case 9:
+                        resetQLearning(scUnit_9);
+                        execute_9();
+                        running = true;
+                        nextScenario = false;
+                        break;
+                    case 10:
+                        resetQLearning(scUnit_10);
+                        execute_10();
+                        running = true;
+                        nextScenario = false;
+                        break;
+                    case 11:
+                        resetQLearning(scUnit_11);
+                        execute_11();
+                        running = true;
+                        nextScenario = false;
+                        break;
+                    case 12:
+                        resetQLearning(scUnit_12);
+                        execute_12();
+                        running = true;
+                        nextScenario = false;
+                        break;
+                }
             }
-
         }
     }
 

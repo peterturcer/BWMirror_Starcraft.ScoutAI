@@ -83,11 +83,11 @@ public class AStarPathCalculator implements Runnable {
         switch (levelOfSafety) {
             case 0: constant_K=0;
                 break;
-            case 1: constant_K=5; //5
+            case 1: constant_K=15; //5
                 break;
             case 2: constant_K=10; //10
                 break;
-            case 3: constant_K=15;
+            case 3: constant_K=5;
                 break;
             case 4: constant_K=20;
                 break;
