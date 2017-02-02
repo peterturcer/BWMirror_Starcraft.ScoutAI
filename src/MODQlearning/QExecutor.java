@@ -16,8 +16,19 @@ public class QExecutor {
     public static boolean EXECUTE=false;
     public static int EXEC_DELAY=50;
 
+    /* Q-learning */
     private Scout_module scout_module;
     private Game game;
+    private QLearning qlearning;
+    private State lastState = null;
+    private Action executingAction = null;
+    private int startState = 0;
+    private ScoutingUnit actualScoutingUnit;
+    private boolean running=false;
+    private boolean nextScenario=false;
+
+    private int reward;
+    /* Q-learning */
 
     private Position safePosition_1;
     private Position safePosition_2;
@@ -50,31 +61,205 @@ public class QExecutor {
 
     private int execFrameCount=0;
 
-
     public QExecutor(Scout_module pScout_module) {
         scout_module=pScout_module;
         game=pScout_module.getGame();
         safePositions=new LinkedList<>();
         scoutingUnits=new LinkedList<>();
+        qlearning=new QLearning();
+        reward=2000;
+    }
+
+    public void executeQLearning() {
+        selectScoutingUnit(scUnit_1);
+        execute_1();
+    }
+
+    public void resetQLearning(ScoutingUnit pScoutingUnit) {
+        reward=2000;                                                                                                        // Reset reward
+        qlearning.loadMatrixIO();                                                                                           // New initialization of QMatrix from file
+        running=false;
+
     }
 
     public void onFrame() {
-        if(!QExecutor.EXECUTE) {
-            execFrameCount=game.getFrameCount();
+
+        /* type `qrun` into chat */
+        if(QExecutor.EXECUTE) {
+            running=true;
+            QExecutor.EXECUTE=false;
         }
-//        if(game.getFrameCount()==200) {
-//            if(QExecutor.DEBUG) {
-//                System.out.println("Executing scouting...");
-//            }
-//            QExecutor.EXECUTE=true;
-//        }
+
         executeAll();
+
+        if(running) {
+            decrementReward();
+        }
+
+        /* update every XX frames, when scoutingUnit is ready */
+        if(actualScoutingUnit.isReadyForQLearning()) {
+            update();
+        }
+
+        /* when scoutingUnit finished learning */
+        if(finishedLearning()) {
+            updateOnEnd();
+            qlearning.saveMatrixIO();                                                                                       // Save QMatrix
+            nextScenario=true;
+        }
     }
 
+    public boolean finishedLearning() {
+        if(actualScoutingUnit.getFinalDestination()!=null) {
+            if(actualScoutingUnit.getUnit().getDistance(actualScoutingUnit.getFinalDestination())<100) {
+                return true;
+            }
+        }
+        if(!actualScoutingUnit.getUnit().exists()) {
+            reward=-999;
+            return true;
+        }
+        return false;
+    }
+
+    public void selectScoutingUnit(ScoutingUnit pScoutingUnit) {
+        actualScoutingUnit=pScoutingUnit;
+    }
+
+    public void decrementReward() {
+        reward--;
+    }
+
+    public void update()
+    {
+        State currentState = detectState(actualScoutingUnit);
+        qlearning.getStates()[startState]=currentState;
+        executingAction = qlearning.estimateBestActionIn(currentState);
+        lastState = currentState;
+
+        /* Execute next action */
+        executingAction.executeAction(actualScoutingUnit);
+    }
+
+    public void updateOnEnd() {
+
+        State currentState = detectState(actualScoutingUnit);
+
+        double currentStateValue = currentState.getValue(game, unit);
+
+        if (game.enemy().getUnits().isEmpty()) {
+            currentStateValue = 0;
+            for (Unit myUnit : game.self().getUnits()) {
+                currentStateValue += myUnit.getType().maxHitPoints() + myUnit.getHitPoints() + myUnit.getShields();
+            }
+        }
+
+        if (lastState != null) {
+            double reward = (currentStateValue - lastStateValue) * 1000;
+            qlearning.experience(lastState, executingAction, currentState, reward);
+        }
+    }
+
+    private State detectState(ScoutingUnit pScoutingUnit) {
+
+        double HP_bound1=0.4;
+        double HP_bound2=0.7;
+
+        double RATIO_bound1=0.4;
+        double RATIO_bound2=0.7;
+
+        double DANGER_bound1=0.4;
+        double DANGER_bound2=0.7;
+
+
+
+        int HP;
+
+        int SAFEPATH; //Pomer najbezpecnejsej cesty k najdlhsej
+        int NORMALPATH; //Pomer normalnej cesty k najdlhsej
+        int RISKPATH; //Pomer najriskantnejsej cesty k najdlhsej
+
+        int SAFEDANGER;
+        int NORMALDANGER;
+        int RISKDANGER;
+
+        String code="";
+
+        if(pScoutingUnit.getUnit().getHitPoints()<pScoutingUnit.getUnit().getHitPoints()*HP_bound1) {
+            HP=1; //Malo HP
+        } else if(pScoutingUnit.getUnit().getHitPoints()<pScoutingUnit.getUnit().getHitPoints()*HP_bound2) {
+            HP=2; //Stredne vela HP
+        } else {
+            HP=3; //Skoro full HP
+        }
+
+
+
+        if(pScoutingUnit.getSafePathDistanceRatio()<RATIO_bound1) {
+            SAFEPATH=1; //O vela kratsia cesta
+        } else if(pScoutingUnit.getSafePathDistanceRatio()<RATIO_bound2) {
+            SAFEPATH=2; //Trochu kratsia cesta
+        } else {
+            SAFEPATH=3; //Skoro rovnaka cesta
+        }
+
+        if(pScoutingUnit.getNormalPathDistanceRatio()<RATIO_bound1) {
+            NORMALPATH=1; //O vela kratsia cesta
+        } else if(pScoutingUnit.getNormalPathDistanceRatio()<RATIO_bound2) {
+            NORMALPATH=2; //Trochu kratsia cesta
+        } else {
+            NORMALPATH=3; //Skoro rovnaka cesta
+        }
+
+        if(pScoutingUnit.getRiskPathDistanceRatio()<RATIO_bound1) {
+            RISKPATH=1; //O vela kratsia cesta
+        } else if(pScoutingUnit.getRiskPathDistanceRatio()<RATIO_bound2) {
+            RISKPATH=2; //Trochu kratsia cesta
+        } else {
+            RISKPATH=3; //Skoro rovnaka cesta
+        }
+
+
+
+
+        if(pScoutingUnit.getSafePathDangerRatio()<DANGER_bound1) {
+            SAFEDANGER=1;
+        } else if(pScoutingUnit.getSafePathDangerRatio()<DANGER_bound2) {
+            SAFEDANGER=2;
+        } else {
+            SAFEDANGER=3;
+        }
+
+        if(pScoutingUnit.getNormalPathDangerRatio()<DANGER_bound1) {
+            NORMALDANGER=1;
+        } else if(pScoutingUnit.getNormalPathDangerRatio()<DANGER_bound2) {
+            NORMALDANGER=2;
+        } else {
+            NORMALDANGER=3;
+        }
+
+        if(pScoutingUnit.getRiskPathDangerRatio()<DANGER_bound1) {
+            RISKDANGER=1;
+        } else if(pScoutingUnit.getRiskPathDangerRatio()<DANGER_bound2) {
+            RISKDANGER=2;
+        } else {
+            RISKDANGER=3;
+        }
+
+        code=""+HP+SAFEPATH+NORMALPATH+RISKPATH+SAFEDANGER+NORMALDANGER+RISKDANGER;
+
+        State state=new State(code,HP,SAFEPATH,NORMALPATH,RISKPATH,SAFEDANGER,NORMALDANGER,RISKDANGER);
+
+        return state;
+    }
+
+    // ToDo - prerobim aby si sam zvolil dalsiu jednotku
     public void executeAll() {
         if(QExecutor.EXECUTE) {
-            if(game.getFrameCount()==execFrameCount+EXEC_DELAY) {
+            if(nextScenario) {
+                resetQLearning(scUnit_1);
                 execute_1();
+                nextScenario=false;
             } else if(game.getFrameCount()==execFrameCount+EXEC_DELAY*2) {
                 execute_2();
             } else if(game.getFrameCount()==execFrameCount+EXEC_DELAY*3) {

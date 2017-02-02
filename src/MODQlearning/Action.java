@@ -9,7 +9,7 @@ public class Action {
 
     public Action(int pSafetyLevel)
     {
-        safetyLevel = pSafetyLevel;
+        safetyLevel=pSafetyLevel;
     }
 
 }

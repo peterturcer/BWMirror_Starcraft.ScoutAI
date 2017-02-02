@@ -13,8 +13,7 @@ public class Bot extends DefaultBWListener {
 
     Scout_module scout;
     ConsoleHandler consoleHandler;
-
-    private ScoutController scoutController;
+    QExecutor qexecutor;
 
     public static void main(String[] args) {
         new Bot().run();
@@ -46,13 +45,11 @@ public class Bot extends DefaultBWListener {
         scout=new Scout_module(game);
         scout.onStart();
         consoleHandler=new ConsoleHandler(scout);
+        qexecutor=new QExecutor(scout);
+        qexecutor.initializeAll();
 
         game.setLocalSpeed(30);
         game.enableFlag(1);
-
-        scoutController=new ScoutController(new QLearning(),game);
-        scoutController.initializeQLearning();
-        scoutController.onStart();
 
         System.out.println("ScoutAI bot working.");
     }
@@ -60,14 +57,14 @@ public class Bot extends DefaultBWListener {
     @Override
     public void onEnd(boolean b) {
         super.onEnd(b);
-        scoutController.onEnd();
     }
 
     @Override
     public void onFrame() {
         super.onFrame();
         scout.onFrame();
-        scoutController.update();
+        qexecutor.onFrame();
+        qexecutor.drawAll();
     }
 
     @Override

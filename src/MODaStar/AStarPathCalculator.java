@@ -341,5 +341,11 @@ public class AStarPathCalculator implements Runnable {
         return blockPathArray;
     }
 
+    public Position getDestinationPosition() {
+        return destinationPosition;
+    }
 
+    public void setDestinationPosition(Position destinationPosition) {
+        this.destinationPosition = destinationPosition;
+    }
 }

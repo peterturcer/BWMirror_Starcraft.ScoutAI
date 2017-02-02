@@ -6,6 +6,7 @@ import MapManager.*;
 import ScoutModule.Scout_module;
 import bwapi.Color;
 import bwapi.Game;
+import bwapi.Position;
 import bwapi.Unit;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
@@ -24,6 +25,8 @@ public class ScoutingUnit {
     public static final int LOCALCHECK_PATH_SIZE=61;
 
     private Unit unit;
+
+    private Position finalDestination;
 
     private AStarPathCalculator aStarPathCalculator;
 
@@ -69,6 +72,27 @@ public class ScoutingUnit {
         hasOrder=true;
         hasTask=pIsTask;
         aStarPathCalculator=pAStarPathCalculator;
+        finalDestination=aStarPathCalculator.getDestinationPosition();
+    }
+
+    public void chooseSafePath() {
+        // ToDo -> choosing safe path for micro
+        throw new NotImplementedException();
+    }
+
+    public void chooseNormalPath() {
+        // ToDo -> choosing normal path for micro
+        throw new NotImplementedException();
+    }
+
+    public void chooseRiskPath() {
+        // ToDo -> choosing risk path for micro
+        throw new NotImplementedException();
+    }
+
+    public boolean isReadyForQLearning() {
+        // ToDo -> when all 3 paths are complete, return true
+        return false;
     }
 
     //public void micro(AStarPathCalculator pMicroPathCalculator) {microPathCalculator=pMicroPathCalculator; }
@@ -478,5 +502,13 @@ public class ScoutingUnit {
 
     public void setFinishedOrder(boolean finishedOrder) {
         this.finishedOrder = finishedOrder;
+    }
+
+    public Position getFinalDestination() {
+        return finalDestination;
+    }
+
+    public void setFinalDestination(Position finalDestination) {
+        this.finalDestination = finalDestination;
     }
 }

@@ -2,25 +2,26 @@ package MODQlearning;
 
 import UnitManagement.ScoutingUnit;
 import bwapi.Game;
+import bwapi.Unit;
 
 
 public class ScoutController {
 
 	private ScoutingUnit scoutingUnit;
+
 	private Game game;
 
 	private QLearning qlearning;
 
 	private State lastState = null;
+
 	private Action executingAction = null;
 
-
-	private int reward = 1000;
-	private int rewardDiscount = 0;
+	private int startState = 0;
 
 	public ScoutController(QLearning pQLearning, Game pGame) {
-		qlearning = pQLearning;
-		game = pGame;
+		qlearning=pQLearning;
+		game=pGame;
 	}
 
 	public void initializeQLearning() {
@@ -36,37 +37,18 @@ public class ScoutController {
 		qlearning.onEnd();
 	}
 
-
-	public void decrementRewardPerFrame()
-	{
-		rewardDiscount += 1;
-	}
-
 	public void update()
 	{
 		State currentState = detectState(getScoutingUnit());
 
-		if (lastState != null) {
+        qlearning.getStates()[startState]=currentState;
 
-			if (scoutingUnit.)
-			{
-				reward += 100;
-				reward -= rewardDiscount;
+        executingAction = (Action) qlearning.estimateBestActionIn(currentState);
 
-			} else if (scoutingUnit.)
-			{
-				reward -= 200;
-				reward -= rewardDiscount;
-			}
-
-			qlearning.experience(lastState, executingAction, currentState, reward);
-		}
-
-		executingAction = qlearning.estimateBestActionIn(currentState);
 		lastState = currentState;
 	}
 
-	/*public void updateOnEnd(ScoutingUnit pScoutingUnit) {
+	public void updateOnEnd(ScoutingUnit pScoutingUnit) {
 
 		State currentState = detectState(pScoutingUnit);
 
@@ -83,7 +65,7 @@ public class ScoutController {
 			double reward = (currentStateValue - lastStateValue) * 1000;
 			qlearning.experience(lastState, executingAction, currentState, reward);
 		}
-	}*/
+	}
 
 
 	private State detectState(ScoutingUnit pScoutingUnit) {
