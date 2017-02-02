@@ -16,11 +16,11 @@ public class Scout_module {
 
     public static boolean DEBUG=false;
 
-    public static final int SAFETY_LEVEL=3;
+    public static final int SAFETY_LEVEL=1;
 
-    public static final int MAP_REFRESH_FRAME_COUNT=15;
+    public static final int MAP_REFRESH_FRAME_COUNT=30;
 
-    public static final int UNIT_DANGERCHECK_FRAME_COUNT=17;
+    public static final int UNIT_DANGERCHECK_FRAME_COUNT=33;
 
     private Game game;
     private UnitManager unitManager;
