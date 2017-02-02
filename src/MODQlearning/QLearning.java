@@ -1,6 +1,5 @@
 package MODQlearning;
 
-import UnitManagement.ScoutingUnit;
 import pers.FileIO;
 
 import java.util.HashMap;
@@ -26,7 +25,7 @@ public class QLearning {
     public QLearning() {
         initializeStates();
         initializeActions();
-        onStart();
+        loadMatrixIO();
 
         if (qMatrixFile.loadFromFile() != null && qMatrixFile.loadFromFile().length == states.length && qMatrixFile.loadFromFile()[0].length == actions.length) {
             this.qMatrix = qMatrixFile.loadFromFile();
@@ -44,17 +43,17 @@ public class QLearning {
     public void initializeActions() {
         actions = new Action[]
                 {
-                    new Action(1),
-                    new Action(2),
-                    new Action(3)
+                    new SafeAction(),
+                    new NormalAction(),
+                    new RiskAction()
                 };
     }
 
-    public void onStart() {
+    public void loadMatrixIO() {
         qMatrixFile = new FileIO("qMatrix.txt");
     }
 
-    public void onEnd() {
+    public void saveMatrixIO() {
         qMatrixFile.saveToFile(getQMatrix());
     }
 
@@ -82,6 +81,27 @@ public class QLearning {
             maxValue = Math.max(qMatrix[stateIndex][actionIndex], maxValue);
         }
         return maxValue;
+    }
+
+    public Action estimateBestActionIn(State state) {
+        int stateIndex = stateIndices.get(state);
+        int bestActionIndex = -1;
+        double maxValue = Double.MIN_VALUE;
+
+        for (int actionIndex = 0; actionIndex < actions.length; actionIndex++) {
+            double value = qMatrix[stateIndex][actionIndex];
+
+            if (bestActionIndex == -1 || value > maxValue) {
+                maxValue = value;
+                bestActionIndex = actionIndex;
+            }
+        }
+
+        if (mProbabilityRandom.nextDouble() < random)
+        {
+            bestActionIndex = mActionIndexRandom.nextInt(actions.length);
+        }
+        return actions[bestActionIndex];
     }
 
 

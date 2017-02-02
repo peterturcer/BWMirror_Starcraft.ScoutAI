@@ -27,15 +27,11 @@ public class Scout_module {
     private MapManager mapManager;
     private ActionManager actionManager;
 
-    private QExecutor qexecutor;
-
     public Scout_module(Game pGame) {
         game=pGame;
         unitManager=new UnitManager(game);
         mapManager=new MapManager(game);
         actionManager=new ActionManager(mapManager,game);
-
-        qexecutor=new QExecutor(this);
     }
 
     public void onStart() {
@@ -57,12 +53,10 @@ public class Scout_module {
 
         manageAll();
         drawAll();
-        qexecutor.onFrame();
     }
 
     public void initializeModules() {
         mapManager.initializeAll();
-        qexecutor.initializeAll();
     }
 
     public void TEST_initializeAll() {
@@ -82,7 +76,6 @@ public class Scout_module {
     public void drawAll() {
         mapManager.drawAll();
         unitManager.drawAll();
-        qexecutor.drawAll();
     }
 
     public void manageAll() {
@@ -140,11 +133,4 @@ public class Scout_module {
         this.actionManager = actionManager;
     }
 
-    public QExecutor getQexecutor() {
-        return qexecutor;
-    }
-
-    public void setQexecutor(QExecutor qexecutor) {
-        this.qexecutor = qexecutor;
-    }
 }
