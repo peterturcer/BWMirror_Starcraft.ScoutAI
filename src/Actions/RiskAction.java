@@ -1,5 +1,6 @@
-package MODQlearning;
+package Actions;
 
+import MODQlearning.Action;
 import UnitManagement.ScoutingUnit;
 
 /**
