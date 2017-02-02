@@ -1,9 +1,9 @@
 package MODQlearning;
 
-import UnitManagement.ScoutingUnit;
 import pers.FileIO;
 
 import java.util.HashMap;
+import java.util.Random;
 
 /**
  * Created by Peter on 7. 1. 2017.
@@ -12,6 +12,7 @@ public class QLearning {
 
     private final double alpha = 0.1; // learning rate  0 - no learning
     private final double gamma = 0.9; // discount factor (importance of future rewards) 0 - only-short sighted
+    private double random = 0.1;
 
     private State states[];
     private Action actions[];
@@ -22,6 +23,9 @@ public class QLearning {
     private HashMap<Action, Integer> actionIndices = new HashMap<>();
 
     private FileIO qMatrixFile;
+
+    private final Random mProbabilityRandom;
+    private final Random mActionIndexRandom;
 
     public QLearning() {
         initializeStates();
@@ -35,6 +39,9 @@ public class QLearning {
         }
 
         buildIndices();
+
+        mProbabilityRandom = new Random();
+        mActionIndexRandom = new Random();
     }
 
     public void initializeStates() {
@@ -71,7 +78,16 @@ public class QLearning {
     }
 
     public void buildMatrix() {
+
         qMatrix = new double[states.length][actions.length];
+
+        for(int i = 0; i < states.length; i++)
+        {
+            for(int j = 0; j < actions.length; j++)
+            {
+                qMatrix[i][j] = 0.0;
+            }
+        }
     }
 
 
@@ -84,6 +100,27 @@ public class QLearning {
         return maxValue;
     }
 
+    public Action estimateBestActionIn(State state) {
+        int stateIndex = stateIndices.get(state);
+        int bestActionIndex = -1;
+        double maxValue = Double.MIN_VALUE;
+
+        for (int actionIndex = 0; actionIndex < actions.length; actionIndex++) {
+            double value = qMatrix[stateIndex][actionIndex];
+
+            if (bestActionIndex == -1 || value > maxValue) {
+                maxValue = value;
+                bestActionIndex = actionIndex;
+            }
+        }
+
+        if (mProbabilityRandom.nextDouble() < random)
+        {
+            bestActionIndex = mActionIndexRandom.nextInt(actions.length);
+        }
+
+        return actions[bestActionIndex];
+    }
 
     public void experience(State currentState, Action action, State nextState, double paReward) {
 
@@ -101,9 +138,11 @@ public class QLearning {
         qMatrix[currentStateIndex][actionIndex] = value;
     }
 
-       public double[][] getQMatrix() {
+    public double[][] getQMatrix() {
         return qMatrix;
     }
+
+
 
     public double getAlpha() {
         return alpha;
