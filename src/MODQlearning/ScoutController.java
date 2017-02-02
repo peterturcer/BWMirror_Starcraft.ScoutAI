@@ -30,11 +30,11 @@ public class ScoutController {
 	}
 
 	public void onStart() {
-		qlearning.onStart();
+		qlearning.loadMatrixIO();
 	}
 
 	public void onEnd() {
-		qlearning.onEnd();
+		qlearning.saveMatrixIO();
 	}
 
 	public void update()
@@ -50,21 +50,21 @@ public class ScoutController {
 
 	public void updateOnEnd(ScoutingUnit pScoutingUnit) {
 
-		State currentState = detectState(pScoutingUnit);
-
-		double currentStateValue = currentState.getValue(game, unit);
-		
-		if (game.enemy().getUnits().isEmpty()) {
-			currentStateValue = 0;
-			for (Unit myUnit : game.self().getUnits()) {
-				currentStateValue += myUnit.getType().maxHitPoints() + myUnit.getHitPoints() + myUnit.getShields();
-			}
-		}
-
-		if (lastState != null) {
-			double reward = (currentStateValue - lastStateValue) * 1000;
-			qlearning.experience(lastState, executingAction, currentState, reward);
-		}
+//		State currentState = detectState(pScoutingUnit);
+//
+//		double currentStateValue = currentState.getValue(game, unit);
+//
+//		if (game.enemy().getUnits().isEmpty()) {
+//			currentStateValue = 0;
+//			for (Unit myUnit : game.self().getUnits()) {
+//				currentStateValue += myUnit.getType().maxHitPoints() + myUnit.getHitPoints() + myUnit.getShields();
+//			}
+//		}
+//
+//		if (lastState != null) {
+//			double reward = (currentStateValue - lastStateValue) * 1000;
+//			qlearning.experience(lastState, executingAction, currentState, reward);
+//		}
 	}
 
 
