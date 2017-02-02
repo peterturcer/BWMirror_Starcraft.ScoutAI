@@ -36,6 +36,7 @@ public class ScoutController {
 		qlearning.onEnd();
 	}
 
+
 	public void update()
 	{
 		State currentState = detectState(getScoutingUnit());
@@ -46,14 +47,20 @@ public class ScoutController {
 			{
 				reward += 100;
 				reward -= rewardDiscount;
+				qlearning.experience(lastState, executingAction, currentState, reward);
 
 			} else if (scoutingUnit.)
 			{
 				reward -= 200;
 				reward -= rewardDiscount;
+				qlearning.experience(lastState, executingAction, currentState, reward);
+			} else
+			{
+
+				qlearning.experience(lastState, executingAction, currentState, 0);
 			}
 
-			qlearning.experience(lastState, executingAction, currentState, reward);
+
 		}
 
 		executingAction = qlearning.estimateBestActionIn(currentState);
