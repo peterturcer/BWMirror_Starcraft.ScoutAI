@@ -3,7 +3,6 @@ package MODQlearning;
 import pers.FileIO;
 
 import java.util.HashMap;
-import java.util.Random;
 
 /**
  * Created by Peter on 7. 1. 2017.
@@ -12,7 +11,6 @@ public class QLearning {
 
     private final double alpha = 0.1; // learning rate  0 - no learning
     private final double gamma = 0.9; // discount factor (importance of future rewards) 0 - only-short sighted
-    private double random = 0.1;
 
     private State states[];
     private Action actions[];
@@ -24,13 +22,10 @@ public class QLearning {
 
     private FileIO qMatrixFile;
 
-    private final Random mProbabilityRandom;
-    private final Random mActionIndexRandom;
-
     public QLearning() {
         initializeStates();
         initializeActions();
-        onStart();
+        loadMatrixIO();
 
         if (qMatrixFile.loadFromFile() != null && qMatrixFile.loadFromFile().length == states.length && qMatrixFile.loadFromFile()[0].length == actions.length) {
             this.qMatrix = qMatrixFile.loadFromFile();
@@ -39,9 +34,6 @@ public class QLearning {
         }
 
         buildIndices();
-
-        mProbabilityRandom = new Random();
-        mActionIndexRandom = new Random();
     }
 
     public void initializeStates() {
@@ -51,17 +43,17 @@ public class QLearning {
     public void initializeActions() {
         actions = new Action[]
                 {
-                    new Action(1),
-                    new Action(2),
-                    new Action(3)
+                    new SafeAction(),
+                    new NormalAction(),
+                    new RiskAction()
                 };
     }
 
-    public void onStart() {
+    public void loadMatrixIO() {
         qMatrixFile = new FileIO("qMatrix.txt");
     }
 
-    public void onEnd() {
+    public void saveMatrixIO() {
         qMatrixFile.saveToFile(getQMatrix());
     }
 
@@ -79,14 +71,6 @@ public class QLearning {
 
     public void buildMatrix() {
         qMatrix = new double[states.length][actions.length];
-
-        for(int i = 0; i < states.length; i++)
-        {
-            for(int j = 0; j < actions.length; j++)
-            {
-                qMatrix[i][j] = 0.0;
-            }
-        }
     }
 
 
@@ -117,9 +101,9 @@ public class QLearning {
         {
             bestActionIndex = mActionIndexRandom.nextInt(actions.length);
         }
-
         return actions[bestActionIndex];
     }
+
 
     public void experience(State currentState, Action action, State nextState, double paReward) {
 

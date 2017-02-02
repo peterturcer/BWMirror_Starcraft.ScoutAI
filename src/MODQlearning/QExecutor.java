@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class QExecutor {
 
-    public static boolean DEBUG=true;
+    public static boolean DEBUG=false;
     public static boolean EXECUTE=false;
 
     /* Q-learning */
@@ -28,6 +28,7 @@ public class QExecutor {
     private int nextUnit=1;
 
     private int reward;
+    private int rewardDiscount = 0;
     /* Q-learning */
 
     private Position safePosition_1;
@@ -73,6 +74,7 @@ public class QExecutor {
     public void resetQLearning(ScoutingUnit pScoutingUnit) {
         reward=2000;                                                                                                        // Reset reward
         qlearning.loadMatrixIO();                                                                                           // New initialization of QMatrix from file
+        actualScoutingUnit=pScoutingUnit;
         running=false;
     }
 
@@ -93,17 +95,32 @@ public class QExecutor {
             }
 
         /* when scoutingUnit finished learning */
-            if(finishedLearning()) {
-                if(running) {
-                    updateOnEnd();
-                    qlearning.saveMatrixIO();// Save QMatrix
-                    running=false;
-                    nextUnit++;
-                    nextScenario=true;
-                }
-            }
+//            if(finishedLearning()) {
+//                if(running) {
+//                    qlearning.saveMatrixIO();// Save QMatrix
+//                    running=false;
+//                    nextUnit++;
+//                    nextScenario=true;
+//                }
+//            }
         }
 
+    }
+
+    public boolean isDead() {
+        if(!actualScoutingUnit.getUnit().exists()) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isSuccesfull() {
+        if(actualScoutingUnit.getFinalDestination()!=null) {
+            if(actualScoutingUnit.getUnit().getDistance(actualScoutingUnit.getFinalDestination())<100) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public boolean finishedLearning() {
@@ -119,43 +136,69 @@ public class QExecutor {
         return false;
     }
 
-    public void selectScoutingUnit(ScoutingUnit pScoutingUnit) {
-        actualScoutingUnit=pScoutingUnit;
-    }
-
     public void decrementReward() {
         reward--;
     }
 
     public void update()
     {
+        System.out.println(":: Q-update ::");
         State currentState = detectState(actualScoutingUnit);
-        qlearning.getStates()[startState]=currentState;
+
+        if (lastState != null) {
+
+            if (isSuccesfull()) {
+                System.out.println(":: Unit won ::");
+                reward += 100;
+                reward -= rewardDiscount;
+                qlearning.experience(lastState, executingAction, currentState, reward);
+
+                qlearning.saveMatrixIO();
+                running=false;
+                nextUnit++;
+                nextScenario=true;
+
+            } else if (isDead()) {
+                System.out.println(":: Unit lose ::");
+                reward -= 200;
+                reward -= rewardDiscount;
+                qlearning.experience(lastState, executingAction, currentState, reward);
+
+                qlearning.saveMatrixIO();
+                running=false;
+                nextUnit++;
+                nextScenario=true;
+            } else {
+                qlearning.experience(lastState, executingAction, currentState, 0);
+            }
+        }
+
         executingAction = qlearning.estimateBestActionIn(currentState);
         lastState = currentState;
 
         /* Execute next action */
+        System.out.println(":: Unit is making action ::");
         executingAction.executeAction(actualScoutingUnit);
     }
 
-    public void updateOnEnd() {
-
-        State currentState = detectState(actualScoutingUnit);
-
-        double currentStateValue = currentState.getValue(game, unit);
-
-        if (game.enemy().getUnits().isEmpty()) {
-            currentStateValue = 0;
-            for (Unit myUnit : game.self().getUnits()) {
-                currentStateValue += myUnit.getType().maxHitPoints() + myUnit.getHitPoints() + myUnit.getShields();
-            }
-        }
-
-        if (lastState != null) {
-            double reward = (currentStateValue - lastStateValue) * 1000;
-            qlearning.experience(lastState, executingAction, currentState, reward);
-        }
-    }
+//    public void updateOnEnd() {
+//
+//        State currentState = detectState(actualScoutingUnit);
+//
+//        double currentStateValue = currentState.getValue(game, unit);
+//
+//        if (game.enemy().getUnits().isEmpty()) {
+//            currentStateValue = 0;
+//            for (Unit myUnit : game.self().getUnits()) {
+//                currentStateValue += myUnit.getType().maxHitPoints() + myUnit.getHitPoints() + myUnit.getShields();
+//            }
+//        }
+//
+//        if (lastState != null) {
+//            double reward = (currentStateValue - lastStateValue) * 1000;
+//            qlearning.experience(lastState, executingAction, currentState, reward);
+//        }
+//    }
 
     private State detectState(ScoutingUnit pScoutingUnit) {
 
@@ -256,18 +299,21 @@ public class QExecutor {
             if(nextScenario) {
                 switch (nextUnit) {
                     case 1:
+                        System.out.println(":: Executing scenario 1 ::");
                         resetQLearning(scUnit_1);
                         execute_1();
                         running = true;
                         nextScenario = false;
                         break;
                     case 2:
+                        System.out.println(":: Executing scenario 2 ::");
                         resetQLearning(scUnit_2);
                         execute_2();
                         running = true;
                         nextScenario = false;
                         break;
                     case 3:
+                        System.out.println(":: Executing scenario 3 ::");
                         resetQLearning(scUnit_3);
                         execute_3();
                         running = true;

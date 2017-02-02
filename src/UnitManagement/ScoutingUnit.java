@@ -58,6 +58,8 @@ public class ScoutingUnit {
 
     private int safety_level=Scout_module.SAFETY_LEVEL;
 
+    private boolean readyToLearn;
+
 
     /* ------------------- Constructors ------------------- */
 
@@ -72,6 +74,8 @@ public class ScoutingUnit {
         hasOrder=false;
         finishedOrder=true;
         hasTask=false;
+
+        readyToLearn=false;
     }
 
 
@@ -98,7 +102,8 @@ public class ScoutingUnit {
     }
 
     public boolean isReadyForQLearning() {
-        if(safeMicroPath!=null&&normalMicroPath!=null&&riskMicroPath!=null) {
+        if(safeMicroPath!=null&&normalMicroPath!=null&&riskMicroPath!=null&&readyToLearn) {
+            readyToLearn=false;
             return true;
         }
         return false;
@@ -395,6 +400,8 @@ public class ScoutingUnit {
         boolean safeDistance=true;
         boolean interruptMicro=true;
         int i;
+
+        readyToLearn=true;
 
         if(microDestinationBlock==null) {
             if(path.size()>ScoutingUnit.LOCALCHECK_PATH_SIZE+5) {

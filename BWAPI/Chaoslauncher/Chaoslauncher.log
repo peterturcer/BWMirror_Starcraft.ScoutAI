@@ -61,3 +61,35 @@
 02.02.2017 15:02:04 7204 ApplyPatch for BWAPI 4.1.2 Injector [RELEASE]
 02.02.2017 15:02:04 7204 ApplyPatch for W-MODE 1.02
 02.02.2017 15:02:04 7204 Starting Starcraft completed
+02.02.2017 18:23:19 7204 Startbutton
+02.02.2017 18:23:19 7204 Starting Game Starcraft 1.16.1 D:\Installs\Games_inst\Starcraft No Install\StarCraft.exe
+02.02.2017 18:23:19 7204 BWAPI 4.1.2 Injector [RELEASE] Version  Compatible
+02.02.2017 18:23:19 7204 W-MODE 1.02 Version 1.0.2 Compatible
+02.02.2017 18:23:19 7204 Could not obtain SeDebugPrivilege Not all privileges or groups referenced are assigned to the caller.
+(1300)
+02.02.2017 18:23:20 7204 CreateProcess
+02.02.2017 18:23:20 7204 Call ScSuspended for all active Plugins
+02.02.2017 18:23:20 7204 ApplyPatchSuspended for BWAPI 4.1.2 Injector [RELEASE]
+02.02.2017 18:23:20 7204 ApplyPatchSuspended for W-MODE 1.02
+02.02.2017 18:23:20 7204 ResumeThread
+02.02.2017 18:23:20 7204 WaitForInputIdle
+02.02.2017 18:23:20 7204 Call ScWindowCreated for all active Plugins
+02.02.2017 18:23:20 7204 ApplyPatch for BWAPI 4.1.2 Injector [RELEASE]
+02.02.2017 18:23:20 7204 ApplyPatch for W-MODE 1.02
+02.02.2017 18:23:20 7204 Starting Starcraft completed
+02.02.2017 18:31:23 7204 Startbutton
+02.02.2017 18:31:23 7204 Starting Game Starcraft 1.16.1 D:\Installs\Games_inst\Starcraft No Install\StarCraft.exe
+02.02.2017 18:31:23 7204 BWAPI 4.1.2 Injector [RELEASE] Version  Compatible
+02.02.2017 18:31:23 7204 W-MODE 1.02 Version 1.0.2 Compatible
+02.02.2017 18:31:23 7204 Could not obtain SeDebugPrivilege Not all privileges or groups referenced are assigned to the caller.
+(1300)
+02.02.2017 18:31:24 7204 CreateProcess
+02.02.2017 18:31:24 7204 Call ScSuspended for all active Plugins
+02.02.2017 18:31:24 7204 ApplyPatchSuspended for BWAPI 4.1.2 Injector [RELEASE]
+02.02.2017 18:31:24 7204 ApplyPatchSuspended for W-MODE 1.02
+02.02.2017 18:31:24 7204 ResumeThread
+02.02.2017 18:31:24 7204 WaitForInputIdle
+02.02.2017 18:31:24 7204 Call ScWindowCreated for all active Plugins
+02.02.2017 18:31:24 7204 ApplyPatch for BWAPI 4.1.2 Injector [RELEASE]
+02.02.2017 18:31:24 7204 ApplyPatch for W-MODE 1.02
+02.02.2017 18:31:24 7204 Starting Starcraft completed

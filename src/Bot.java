@@ -13,7 +13,7 @@ public class Bot extends DefaultBWListener {
 
     Scout_module scout;
     ConsoleHandler consoleHandler;
-    QExecutor qexecutor;
+    //QExecutor qexecutor;
 
     public static void main(String[] args) {
         new Bot().run();
@@ -45,8 +45,8 @@ public class Bot extends DefaultBWListener {
         scout=new Scout_module(game);
         scout.onStart();
         consoleHandler=new ConsoleHandler(scout);
-        qexecutor = new QExecutor(scout);
-        qexecutor.initializeAll();
+        //qexecutor=new QExecutor(scout);
+        //qexecutor.initializeAll();
 
         game.setLocalSpeed(50);
         game.enableFlag(1);
