@@ -81,6 +81,10 @@ public class QLearning {
         for (int i = 0; i < actions.length; i++) {
             actionIndices.put(actions[i], i);
         }
+
+        System.out.println(":: State indices size = "+stateIndices.size()+" ::");
+        System.out.println(":: Action indices size = "+actionIndices.size()+" ::");
+
     }
 
     public void buildMatrix() {
@@ -94,6 +98,7 @@ public class QLearning {
                 qMatrix[i][j] = 0.0;
             }
         }
+        System.out.println(":: Matrix = ["+states.length+"]x["+actions.length+"]  ::");
     }
 
 
@@ -129,6 +134,8 @@ public class QLearning {
 
 
     public void experience(State currentState, Action action, State nextState, double paReward) {
+
+        System.out.println(":: Calculating experience ::");
 
         int currentStateIndex = stateIndices.get(currentState);
         int nextStateIndex = stateIndices.get(nextState);

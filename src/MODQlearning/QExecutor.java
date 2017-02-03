@@ -44,6 +44,8 @@ public class QExecutor {
     private Position safePosition_11;
     private Position safePosition_12;
 
+    private Position endPosition;
+
     private ScoutingUnit scUnit_1;
     private ScoutingUnit scUnit_2;
     private ScoutingUnit scUnit_3;
@@ -57,6 +59,10 @@ public class QExecutor {
     private ScoutingUnit scUnit_11;
     private ScoutingUnit scUnit_12;
 
+    private ScoutingUnit endUnit;
+
+    private boolean isDead;
+
     private List<Position> safePositions;
     private List<ScoutingUnit> scoutingUnits;
 
@@ -69,6 +75,7 @@ public class QExecutor {
         scoutingUnits=new LinkedList<>();
         qlearning=new QLearning();
         reward=2000;
+        isDead=false;
     }
 
     public void resetQLearning(ScoutingUnit pScoutingUnit) {
@@ -79,6 +86,9 @@ public class QExecutor {
     }
 
     public void onFrame() {
+        if(actualScoutingUnit!=null) {
+            isDead = !actualScoutingUnit.getUnit().exists();
+        }
 
         /* type `qrun` into chat */
         if(QExecutor.EXECUTE) {
@@ -108,7 +118,7 @@ public class QExecutor {
     }
 
     public boolean isDead() {
-        if(!actualScoutingUnit.getUnit().exists()) {
+        if(!actualScoutingUnit.getUnit().isMoving()&&actualScoutingUnit.getUnit().getHitPoints()<actualScoutingUnit.getUnit().getInitialHitPoints()&&actualScoutingUnit.getUnit().getPosition().getDistance(actualScoutingUnit.getFinalDestination())>150) {
             return true;
         }
         return false;
@@ -158,7 +168,7 @@ public class QExecutor {
                 nextUnit++;
                 nextScenario=true;
 
-            } else if (isDead()) {
+            } else if (isDead) {
                 System.out.println(":: Unit lose ::");
                 reward -= 200;
                 reward -= rewardDiscount;
@@ -169,6 +179,7 @@ public class QExecutor {
                 nextUnit++;
                 nextScenario=true;
             } else {
+                System.out.println(":: Unit making progress ::");
                 qlearning.experience(lastState, executingAction, currentState, 0);
             }
         }
@@ -201,6 +212,8 @@ public class QExecutor {
 //    }
 
     private State detectState(ScoutingUnit pScoutingUnit) {
+
+        System.out.println(":: Detecting state ::");
 
         double HP_bound1=0.4;
         double HP_bound2=0.7;
@@ -290,10 +303,11 @@ public class QExecutor {
 
         State state=new State(code,HP,SAFEPATH,NORMALPATH,RISKPATH,SAFEDANGER,NORMALDANGER,RISKDANGER);
 
+        System.out.println(":: Detected state = "+state+" ::");
+
         return state;
     }
 
-    // ToDo - prerobim aby si sam zvolil dalsiu jednotku
     public void executeAll() {
         if(!running) {
             if(nextScenario) {
@@ -373,6 +387,9 @@ public class QExecutor {
                         running = true;
                         nextScenario = false;
                         break;
+                    case 13:
+                        execute_END();
+                        nextUnit=1;
                 }
             }
         }
@@ -390,7 +407,16 @@ public class QExecutor {
                     System.out.println("ID = " + u.getID());
                 }
 
-                if(u.getPosition().getDistance(258,1054)<100) {
+                if(u.getPosition().getDistance(270,258)<200) {
+                    if(u.canMove()) {
+                        endUnit=new ScoutingUnit(u);
+                        scoutingUnits.add(endUnit);
+                        scout_module.getUnitManager().addScoutingUnit(endUnit);
+                        if(QExecutor.DEBUG) {
+                            System.out.println("EndUnit initialized.");
+                        }
+                    }
+                } else if(u.getPosition().getDistance(258,1054)<100) {
                     scUnit_1=new ScoutingUnit(u);
                     scoutingUnits.add(scUnit_1);
                     scout_module.getUnitManager().addScoutingUnit(scUnit_1);
@@ -486,7 +512,13 @@ public class QExecutor {
         for(Unit u:game.getAllUnits()) {
             if(u.getPlayer()==game.self()) {
                 if(u.getType()==UnitType.Terran_Bunker) {
-                    if(u.getPosition().getDistance(1648,1056)<100) {
+                    if(u.getPosition().getDistance(1008,258)<200) {
+                        endPosition=u.getPosition();
+                        safePositions.add(u.getPosition());
+                        if(QExecutor.DEBUG) {
+                            System.out.println("EndPosition initialized.");
+                        }
+                    } else if(u.getPosition().getDistance(1648,1056)<100) {
                         safePosition_1=u.getPosition();
                         safePositions.add(u.getPosition());
                         if(QExecutor.DEBUG) {
@@ -615,9 +647,14 @@ public class QExecutor {
         scout_module.getActionManager().scoutPosition(safePosition_12,scUnit_12);
     }
 
+    public void execute_END() {
+        scout_module.getActionManager().scoutPosition(endPosition,endUnit);
+    }
+
     public void drawAll() {
         drawSafePositions();
         drawSelectedIDs();
+        drawActualScoutingUnit();
     }
 
     public void drawSelectedIDs() {
@@ -635,9 +672,28 @@ public class QExecutor {
         }
     }
 
+    public void drawActualScoutingUnit() {
+        game.drawCircleMap(actualScoutingUnit.getUnit().getPosition(),80,Color.Orange);
+    }
+
     public void drawScoutingUnits() {
         for(ScoutingUnit scu:scoutingUnits) {
             game.drawBoxMap(scu.getUnit().getPosition().getX()-20,scu.getUnit().getPosition().getY()-20,scu.getUnit().getPosition().getX()+20,scu.getUnit().getPosition().getY()+20,Color.Blue);
         }
+    }
+
+    public void showAll() {
+        showReward();
+        showActualUnitStats();
+    }
+
+    public void showReward() {
+        game.drawTextScreen(20,20,"Reward     = "+Integer.toString(reward));
+    }
+
+    public void showActualUnitStats() {
+        game.drawTextScreen(20,40,"IsAlive    = "+actualScoutingUnit.getUnit().exists());
+        game.drawTextScreen(20,60,"Unit HP    = "+actualScoutingUnit.getUnit().getHitPoints());
+        game.drawTextScreen(20,80,"Unit path  = "+actualScoutingUnit.getMicroPathChooser());
     }
 }

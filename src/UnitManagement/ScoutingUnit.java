@@ -60,6 +60,8 @@ public class ScoutingUnit {
 
     private boolean readyToLearn;
 
+    private boolean isAlive;
+
 
     /* ------------------- Constructors ------------------- */
 
@@ -76,6 +78,7 @@ public class ScoutingUnit {
         hasTask=false;
 
         readyToLearn=false;
+        isAlive=true;
     }
 
 
@@ -148,6 +151,15 @@ public class ScoutingUnit {
         manageIdle();
         manageScoutingArea(pGame, pMapManager);
         manageFinishedSignalization();
+        manageIsAlive();
+    }
+
+    public void manageIsAlive() {
+        if(unit.exists()) {
+            isAlive=true;
+        } else {
+            isAlive=false;
+        }
     }
 
     public void managePathCalculator() {
@@ -660,5 +672,17 @@ public class ScoutingUnit {
 
     public void setFinalDestination(Position finalDestination) {
         this.finalDestination = finalDestination;
+    }
+
+    public int getMicroPathChooser() {
+        return microPathChooser;
+    }
+
+    public void setMicroPathChooser(int microPathChooser) {
+        this.microPathChooser = microPathChooser;
+    }
+
+    public boolean getIsAlive() {
+        return isAlive;
     }
 }

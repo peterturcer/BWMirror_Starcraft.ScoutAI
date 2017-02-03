@@ -1,6 +1,5 @@
 package MODQlearning;
 
-import ScoutModule.Scout_module;
 import UnitManagement.ScoutingUnit;
 
 /**
