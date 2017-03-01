@@ -31,8 +31,22 @@ public class State {
         this.riskPath_danger_ratio = pRISKPATH_DANGER_RATIO;
     }
 
-    public int getHashCode() {
+    @Override
+    public int hashCode() {
         return hashCode.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null) return false;
+
+        State us = (State) o;
+        return hashCode.equals(us.hashCode);
+    }
+
+    @Override
+    public String toString() {
+        return hashCode+"|"+hp+"|"+safePath_distance_ratio+"|"+normalPath_distance_ratio+"|"+riskPath_distance_ratio+"|"+safePath_danger_ratio+"|"+normalPath_danger_ratio+"|"+riskPath_danger_ratio;
     }
 
 }
