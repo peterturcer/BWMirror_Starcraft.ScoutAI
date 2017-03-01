@@ -1,8 +1,5 @@
 package MODQlearning;
 
-import Actions.NormalAction;
-import Actions.RiskAction;
-import Actions.SafeAction;
 import pers.FileIO;
 
 import java.util.HashMap;
@@ -15,7 +12,7 @@ public class QLearning {
 
     private final double alpha = 0.1; // learning rate  0 - no learning
     private final double gamma = 0.9; // discount factor (importance of future rewards) 0 - only-short sighted
-    private double random = 0.1;
+    private double random = 0.8;
 
     private State states[];
     private Action actions[];
@@ -48,10 +45,12 @@ public class QLearning {
     }
 
     public void initializeStates() {
+        System.out.println(":: Initializing states ::");
         states = MatrixBuilder.build();
     }
 
     public void initializeActions() {
+        System.out.println(":: Initializing actions ::");
         actions = new Action[]
                 {
                     new SafeAction(),
@@ -61,15 +60,19 @@ public class QLearning {
     }
 
     public void loadMatrixIO() {
+        System.out.println(":: Loading matrix ::");
         qMatrixFile = new FileIO("qMatrix.txt");
     }
 
     public void saveMatrixIO() {
+        System.out.println(":: Saving matrix ::");
         qMatrixFile.saveToFile(getQMatrix());
     }
 
 
     public void buildIndices() {
+
+        System.out.println(":: Building indices ::");
 
         for (int i = 0; i < states.length; i++) {
             stateIndices.put(states[i], i);
@@ -78,10 +81,24 @@ public class QLearning {
         for (int i = 0; i < actions.length; i++) {
             actionIndices.put(actions[i], i);
         }
+
+        System.out.println(":: State indices size = "+stateIndices.size()+" ::");
+        System.out.println(":: Action indices size = "+actionIndices.size()+" ::");
+
     }
 
     public void buildMatrix() {
+        System.out.println("::Building matrix ::");
         qMatrix = new double[states.length][actions.length];
+
+        for(int i = 0; i < states.length; i++)
+        {
+            for(int j = 0; j < actions.length; j++)
+            {
+                qMatrix[i][j] = 0.0;
+            }
+        }
+        System.out.println(":: Matrix = ["+states.length+"]x["+actions.length+"]  ::");
     }
 
 
@@ -117,6 +134,8 @@ public class QLearning {
 
 
     public void experience(State currentState, Action action, State nextState, double paReward) {
+
+        System.out.println(":: Calculating experience ::");
 
         int currentStateIndex = stateIndices.get(currentState);
         int nextStateIndex = stateIndices.get(nextState);
