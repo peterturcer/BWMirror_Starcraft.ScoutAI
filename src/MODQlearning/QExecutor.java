@@ -148,6 +148,7 @@ public class QExecutor {
         if (lastState != null) {
 
             if (isSuccesfull()) {
+
                 System.out.println(":: Unit won ::");
                 reward += 100;
                 reward -= rewardDiscount;
@@ -159,6 +160,7 @@ public class QExecutor {
                 nextScenario=true;
 
             } else if (isDead()) {
+
                 System.out.println(":: Unit lose ::");
                 reward -= 200;
                 reward -= rewardDiscount;
@@ -168,6 +170,7 @@ public class QExecutor {
                 running=false;
                 nextUnit++;
                 nextScenario=true;
+
             } else {
                 qlearning.experience(lastState, executingAction, currentState, 0);
             }
@@ -181,24 +184,6 @@ public class QExecutor {
         executingAction.executeAction(actualScoutingUnit);
     }
 
-//    public void updateOnEnd() {
-//
-//        State currentState = detectState(actualScoutingUnit);
-//
-//        double currentStateValue = currentState.getValue(game, unit);
-//
-//        if (game.enemy().getUnits().isEmpty()) {
-//            currentStateValue = 0;
-//            for (Unit myUnit : game.self().getUnits()) {
-//                currentStateValue += myUnit.getType().maxHitPoints() + myUnit.getHitPoints() + myUnit.getShields();
-//            }
-//        }
-//
-//        if (lastState != null) {
-//            double reward = (currentStateValue - lastStateValue) * 1000;
-//            qlearning.experience(lastState, executingAction, currentState, reward);
-//        }
-//    }
 
     private State detectState(ScoutingUnit pScoutingUnit) {
 

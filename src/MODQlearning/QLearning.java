@@ -1,8 +1,12 @@
 package MODQlearning;
 
+import Actions.NormalAction;
+import Actions.RiskAction;
+import Actions.SafeAction;
 import pers.FileIO;
 
 import java.util.HashMap;
+import java.util.Random;
 
 /**
  * Created by Peter on 7. 1. 2017.
@@ -11,6 +15,7 @@ public class QLearning {
 
     private final double alpha = 0.1; // learning rate  0 - no learning
     private final double gamma = 0.9; // discount factor (importance of future rewards) 0 - only-short sighted
+    private double random = 0.1;
 
     private State states[];
     private Action actions[];
@@ -21,6 +26,9 @@ public class QLearning {
     private HashMap<Action, Integer> actionIndices = new HashMap<>();
 
     private FileIO qMatrixFile;
+
+    private final Random mProbabilityRandom;
+    private final Random mActionIndexRandom;
 
     public QLearning() {
         initializeStates();
@@ -34,6 +42,9 @@ public class QLearning {
         }
 
         buildIndices();
+
+        mProbabilityRandom = new Random();
+        mActionIndexRandom = new Random();
     }
 
     public void initializeStates() {
