@@ -12,7 +12,7 @@ public class QLearning {
 
     private final double alpha = 0.1; // learning rate  0 - no learning
     private final double gamma = 0.9; // discount factor (importance of future rewards) 0 - only-short sighted
-    private double random = 0.1;
+    private double random = 0.8;
 
     private State states[];
     private Action actions[];

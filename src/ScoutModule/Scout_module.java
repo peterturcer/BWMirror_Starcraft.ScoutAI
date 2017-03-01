@@ -16,7 +16,7 @@ public class Scout_module {
 
     public static boolean DEBUG=false;
 
-    public static final int SAFETY_LEVEL=1;
+    public static final int SAFETY_LEVEL=2;
 
     public static final int MAP_REFRESH_FRAME_COUNT=30;
 

@@ -11,6 +11,7 @@ import bwapi.Unit;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * ScoutingUnit represents exact unit set for scouting tasks. Management of movement is independent of other modules.

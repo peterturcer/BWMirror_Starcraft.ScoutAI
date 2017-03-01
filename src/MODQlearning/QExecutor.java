@@ -86,6 +86,8 @@ public class QExecutor {
     }
 
     public void onFrame() {
+        //cameraLockOnActualUnit();
+
         if(actualScoutingUnit!=null) {
             isDead = !actualScoutingUnit.getUnit().exists();
         }
@@ -152,13 +154,19 @@ public class QExecutor {
 
     public void update()
     {
-        System.out.println(":: Q-update ::");
+        if(DEBUG) {
+            System.out.println(":: Q-update ::");
+        }
+
         State currentState = detectState(actualScoutingUnit);
 
         if (lastState != null) {
 
             if (isSuccesfull()) {
-                System.out.println(":: Unit won ::");
+                if(DEBUG) {
+                    System.out.println(":: Unit won ::");
+                }
+
                 reward += 100;
                 reward -= rewardDiscount;
                 qlearning.experience(lastState, executingAction, currentState, reward);
@@ -169,7 +177,9 @@ public class QExecutor {
                 nextScenario=true;
 
             } else if (isDead) {
-                System.out.println(":: Unit lose ::");
+                if(DEBUG) {
+                    System.out.println(":: Unit lose ::");
+                }
                 reward -= 200;
                 reward -= rewardDiscount;
                 qlearning.experience(lastState, executingAction, currentState, reward);
@@ -179,7 +189,9 @@ public class QExecutor {
                 nextUnit++;
                 nextScenario=true;
             } else {
-                System.out.println(":: Unit making progress ::");
+                if(DEBUG) {
+                    System.out.println(":: Unit making progress ::");
+                }
                 qlearning.experience(lastState, executingAction, currentState, 0);
             }
         }
@@ -188,7 +200,9 @@ public class QExecutor {
         lastState = currentState;
 
         /* Execute next action */
-        System.out.println(":: Unit is making action ::");
+        if(DEBUG) {
+            System.out.println(":: Unit is making action ::");
+        }
         executingAction.executeAction(actualScoutingUnit);
     }
 
@@ -213,7 +227,9 @@ public class QExecutor {
 
     private State detectState(ScoutingUnit pScoutingUnit) {
 
-        System.out.println(":: Detecting state ::");
+        if(DEBUG) {
+            System.out.println(":: Detecting state ::");
+        }
 
         double HP_bound1=0.4;
         double HP_bound2=0.7;
@@ -303,7 +319,9 @@ public class QExecutor {
 
         State state=new State(code,HP,SAFEPATH,NORMALPATH,RISKPATH,SAFEDANGER,NORMALDANGER,RISKDANGER);
 
-        System.out.println(":: Detected state = "+state+" ::");
+        if(DEBUG) {
+            System.out.println(":: Detected state = "+state+" ::");
+        }
 
         return state;
     }
@@ -313,21 +331,27 @@ public class QExecutor {
             if(nextScenario) {
                 switch (nextUnit) {
                     case 1:
-                        System.out.println(":: Executing scenario 1 ::");
+                        if(DEBUG) {
+                            System.out.println(":: Executing scenario 1 ::");
+                        }
                         resetQLearning(scUnit_1);
                         execute_1();
                         running = true;
                         nextScenario = false;
                         break;
                     case 2:
-                        System.out.println(":: Executing scenario 2 ::");
+                        if(DEBUG) {
+                            System.out.println(":: Executing scenario 2 ::");
+                        }
                         resetQLearning(scUnit_2);
                         execute_2();
                         running = true;
                         nextScenario = false;
                         break;
                     case 3:
-                        System.out.println(":: Executing scenario 3 ::");
+                        if(DEBUG) {
+                            System.out.println(":: Executing scenario 3 ::");
+                        }
                         resetQLearning(scUnit_3);
                         execute_3();
                         running = true;
@@ -695,5 +719,11 @@ public class QExecutor {
         game.drawTextScreen(20,40,"IsAlive    = "+actualScoutingUnit.getUnit().exists());
         game.drawTextScreen(20,60,"Unit HP    = "+actualScoutingUnit.getUnit().getHitPoints());
         game.drawTextScreen(20,80,"Unit path  = "+actualScoutingUnit.getMicroPathChooser());
+    }
+
+    public void cameraLockOnActualUnit() {
+        if(actualScoutingUnit!=null) {
+            game.setScreenPosition(actualScoutingUnit.getUnit().getX()-200,actualScoutingUnit.getUnit().getY()-200);
+        }
     }
 }

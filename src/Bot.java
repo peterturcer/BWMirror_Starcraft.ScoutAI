@@ -92,6 +92,9 @@ public class Bot extends DefaultBWListener {
     @Override
     public void onUnitDiscover(Unit unit) {
         super.onUnitDiscover(unit);
+
+        //ToDo - implement into unitManager manageAll()
+        scout.getUnitManager().manageDetection(unit,scout.getMapManager());
     }
 
     @Override
