@@ -1,91 +1,48 @@
-1.3.2017 9:38:33 1248 Logging started
-1.3.2017 9:38:33 1248 Begin Startup
-1.3.2017 9:38:33 1248 Chaosauncher 0.5.4.4 on NT 6.1.7600  at D:\PROJECTS\JAVA\BWMirror_Starcraft.ScoutAI\BWAPI\Chaoslauncher\Chaoslauncher.exe
-1.3.2017 9:38:33 1248 Load Settings
-1.3.2017 9:38:33 1248 GamePath: D:\Games\Starcraft No Install\
-1.3.2017 9:38:33 1248 Load Plugins
-1.3.2017 9:38:33 1248 AdvLoaderPluginPath: \Plugins\
-1.3.2017 9:38:33 1248 Loading BWL4-Plugin D:\PROJECTS\JAVA\BWMirror_Starcraft.ScoutAI\BWAPI\Chaoslauncher\iccscbn.icc
-1.3.2017 9:38:33 1248 Plugin loaded ICCup
-1.3.2017 9:38:33 1248 Loading BWL4-Plugin D:\PROJECTS\JAVA\BWMirror_Starcraft.ScoutAI\BWAPI\Chaoslauncher\Plugins\APMAlert.bwl
-1.3.2017 9:38:33 1248 Plugin loaded APMAlert (1.16.1)
-1.3.2017 9:38:33 1248 Loading BWL4-Plugin D:\PROJECTS\JAVA\BWMirror_Starcraft.ScoutAI\BWAPI\Chaoslauncher\Plugins\BWAPI_PluginInjector.bwl
-1.3.2017 9:38:34 1248 Plugin loaded BWAPI 4.1.2 Injector [RELEASE]
-1.3.2017 9:38:34 1248 Loading BWL4-Plugin D:\PROJECTS\JAVA\BWMirror_Starcraft.ScoutAI\BWAPI\Chaoslauncher\Plugins\Chaosplugin.bwl
-1.3.2017 9:38:34 1248 Plugin loaded Chaosplugin for 1.16.1
-1.3.2017 9:38:34 1248 Loading BWL4-Plugin D:\PROJECTS\JAVA\BWMirror_Starcraft.ScoutAI\BWAPI\Chaoslauncher\Plugins\LatencyChanger.bwl
-1.3.2017 9:38:34 1248 Plugin loaded LatencyChanger for 1.16.1
-1.3.2017 9:38:34 1248 Loading BWL4-Plugin D:\PROJECTS\JAVA\BWMirror_Starcraft.ScoutAI\BWAPI\Chaoslauncher\Plugins\repfix.bwl
-1.3.2017 9:38:34 1248 Plugin loaded RepFix
-1.3.2017 9:38:34 1248 Loading BWL4-Plugin D:\PROJECTS\JAVA\BWMirror_Starcraft.ScoutAI\BWAPI\Chaoslauncher\Plugins\RWAPlayer.bwl
-1.3.2017 9:38:35 1248 Plugin loaded RWAPlayer (1.16.1)
-1.3.2017 9:38:35 1248 Loading BWL4-Plugin D:\PROJECTS\JAVA\BWMirror_Starcraft.ScoutAI\BWAPI\Chaoslauncher\Plugins\RWARecorder.bwl
-1.3.2017 9:38:35 1248 Plugin loaded RWARecorder (1.16.1)
-1.3.2017 9:38:35 1248 Loading BWL4-Plugin D:\PROJECTS\JAVA\BWMirror_Starcraft.ScoutAI\BWAPI\Chaoslauncher\Plugins\Stormplugin.bwl
-1.3.2017 9:38:35 1248 Plugin loaded Stormplugin for 1.16.1
-1.3.2017 9:38:35 1248 Loading BWL4-Plugin D:\PROJECTS\JAVA\BWMirror_Starcraft.ScoutAI\BWAPI\Chaoslauncher\Plugins\wmode.bwl
-1.3.2017 9:38:35 1248 Plugin loaded W-MODE 1.02
-1.3.2017 9:38:35 1248 Load Tools
-1.3.2017 9:38:35 1248 Init GUI
-1.3.2017 9:38:35 1248 Get Starcraftversions
-1.3.2017 9:38:35 1248 Init complete
-1.3.2017 9:38:43 1248 Startbutton
-1.3.2017 9:38:43 1248 Starting Game Starcraft 1.16.1 D:\Games\Starcraft No Install\StarCraft.exe
-1.3.2017 9:38:43 1248 BWAPI 4.1.2 Injector [RELEASE] Version  Compatible
-1.3.2017 9:38:43 1248 W-MODE 1.02 Version 1.0.2 Compatible
-1.3.2017 9:38:43 1248 Obtained DebugPrivilege
-1.3.2017 9:38:43 1248 CreateProcess
-1.3.2017 9:38:45 1248 Call ScSuspended for all active Plugins
-1.3.2017 9:38:45 1248 ApplyPatchSuspended for BWAPI 4.1.2 Injector [RELEASE]
-1.3.2017 9:38:45 1248 ApplyPatchSuspended for W-MODE 1.02
-1.3.2017 9:38:45 1248 ResumeThread
-1.3.2017 9:38:45 1248 WaitForInputIdle
-1.3.2017 9:38:46 1248 Call ScWindowCreated for all active Plugins
-1.3.2017 9:38:46 1248 ApplyPatch for BWAPI 4.1.2 Injector [RELEASE]
-1.3.2017 9:38:46 1248 ApplyPatch for W-MODE 1.02
-1.3.2017 9:38:46 1248 Starting Starcraft completed
-1.3.2017 9:44:20 1248 Startbutton
-1.3.2017 9:44:20 1248 Starting Game Starcraft 1.16.1 D:\Games\Starcraft No Install\StarCraft.exe
-1.3.2017 9:44:20 1248 BWAPI 4.1.2 Injector [RELEASE] Version  Compatible
-1.3.2017 9:44:20 1248 W-MODE 1.02 Version 1.0.2 Compatible
-1.3.2017 9:44:20 1248 Obtained DebugPrivilege
-1.3.2017 9:44:20 1248 CreateProcess
-1.3.2017 9:44:20 1248 Call ScSuspended for all active Plugins
-1.3.2017 9:44:20 1248 ApplyPatchSuspended for BWAPI 4.1.2 Injector [RELEASE]
-1.3.2017 9:44:21 1248 ApplyPatchSuspended for W-MODE 1.02
-1.3.2017 9:44:21 1248 ResumeThread
-1.3.2017 9:44:21 1248 WaitForInputIdle
-1.3.2017 9:44:21 1248 Call ScWindowCreated for all active Plugins
-1.3.2017 9:44:21 1248 ApplyPatch for BWAPI 4.1.2 Injector [RELEASE]
-1.3.2017 9:44:21 1248 ApplyPatch for W-MODE 1.02
-1.3.2017 9:44:21 1248 Starting Starcraft completed
-1.3.2017 10:04:36 1248 Startbutton
-1.3.2017 10:04:36 1248 Starting Game Starcraft 1.16.1 D:\Games\Starcraft No Install\StarCraft.exe
-1.3.2017 10:04:36 1248 BWAPI 4.1.2 Injector [RELEASE] Version  Compatible
-1.3.2017 10:04:36 1248 W-MODE 1.02 Version 1.0.2 Compatible
-1.3.2017 10:04:36 1248 Obtained DebugPrivilege
-1.3.2017 10:04:36 1248 CreateProcess
-1.3.2017 10:04:36 1248 Call ScSuspended for all active Plugins
-1.3.2017 10:04:36 1248 ApplyPatchSuspended for BWAPI 4.1.2 Injector [RELEASE]
-1.3.2017 10:04:36 1248 ApplyPatchSuspended for W-MODE 1.02
-1.3.2017 10:04:36 1248 ResumeThread
-1.3.2017 10:04:36 1248 WaitForInputIdle
-1.3.2017 10:04:36 1248 Call ScWindowCreated for all active Plugins
-1.3.2017 10:04:36 1248 ApplyPatch for BWAPI 4.1.2 Injector [RELEASE]
-1.3.2017 10:04:36 1248 ApplyPatch for W-MODE 1.02
-1.3.2017 10:04:36 1248 Starting Starcraft completed
-1.3.2017 10:06:01 1248 Startbutton
-1.3.2017 10:06:01 1248 Starting Game Starcraft 1.16.1 D:\Games\Starcraft No Install\StarCraft.exe
-1.3.2017 10:06:01 1248 BWAPI 4.1.2 Injector [RELEASE] Version  Compatible
-1.3.2017 10:06:01 1248 W-MODE 1.02 Version 1.0.2 Compatible
-1.3.2017 10:06:01 1248 Obtained DebugPrivilege
-1.3.2017 10:06:01 1248 CreateProcess
-1.3.2017 10:06:01 1248 Call ScSuspended for all active Plugins
-1.3.2017 10:06:01 1248 ApplyPatchSuspended for BWAPI 4.1.2 Injector [RELEASE]
-1.3.2017 10:06:01 1248 ApplyPatchSuspended for W-MODE 1.02
-1.3.2017 10:06:01 1248 ResumeThread
-1.3.2017 10:06:01 1248 WaitForInputIdle
-1.3.2017 10:06:01 1248 Call ScWindowCreated for all active Plugins
-1.3.2017 10:06:01 1248 ApplyPatch for BWAPI 4.1.2 Injector [RELEASE]
-1.3.2017 10:06:01 1248 ApplyPatch for W-MODE 1.02
-1.3.2017 10:06:01 1248 Starting Starcraft completed
+24. 5. 2017 14:59:03 5736 Logging started
+24. 5. 2017 14:59:03 5736 Already running
+24. 5. 2017 14:59:03 5736 Logging ended
+24. 5. 2017 14:59:05 2420 Startbutton
+24. 5. 2017 14:59:05 2420 Starting Game Starcraft 1.16.1 C:\Games\Starcraft\StarCraft.exe
+24. 5. 2017 14:59:05 2420 BWAPI 4.1.2 Injector [RELEASE] Version  Compatible
+24. 5. 2017 14:59:05 2420 W-MODE 1.02 Version 1.0.2 Compatible
+24. 5. 2017 14:59:05 2420 Obtained DebugPrivilege
+24. 5. 2017 14:59:05 2420 CreateProcess
+24. 5. 2017 14:59:05 2420 Call ScSuspended for all active Plugins
+24. 5. 2017 14:59:05 2420 ApplyPatchSuspended for BWAPI 4.1.2 Injector [RELEASE]
+24. 5. 2017 14:59:08 2420 ApplyPatchSuspended for W-MODE 1.02
+24. 5. 2017 14:59:08 2420 ResumeThread
+24. 5. 2017 14:59:08 2420 WaitForInputIdle
+24. 5. 2017 14:59:08 2420 Call ScWindowCreated for all active Plugins
+24. 5. 2017 14:59:08 2420 ApplyPatch for BWAPI 4.1.2 Injector [RELEASE]
+24. 5. 2017 14:59:08 2420 ApplyPatch for W-MODE 1.02
+24. 5. 2017 14:59:08 2420 Starting Starcraft completed
+24. 5. 2017 14:59:17 2420 Startbutton
+24. 5. 2017 14:59:17 2420 Starting Game Starcraft 1.16.1 C:\Games\Starcraft\StarCraft.exe
+24. 5. 2017 14:59:17 2420 BWAPI 4.1.2 Injector [RELEASE] Version  Compatible
+24. 5. 2017 14:59:17 2420 W-MODE 1.02 Version 1.0.2 Compatible
+24. 5. 2017 14:59:17 2420 Obtained DebugPrivilege
+24. 5. 2017 14:59:17 2420 CreateProcess
+24. 5. 2017 14:59:17 2420 Call ScSuspended for all active Plugins
+24. 5. 2017 14:59:17 2420 ApplyPatchSuspended for BWAPI 4.1.2 Injector [RELEASE]
+24. 5. 2017 14:59:20 2420 ApplyPatchSuspended for W-MODE 1.02
+24. 5. 2017 14:59:20 2420 ResumeThread
+24. 5. 2017 14:59:20 2420 WaitForInputIdle
+24. 5. 2017 14:59:20 2420 Call ScWindowCreated for all active Plugins
+24. 5. 2017 14:59:20 2420 ApplyPatch for BWAPI 4.1.2 Injector [RELEASE]
+24. 5. 2017 14:59:20 2420 ApplyPatch for W-MODE 1.02
+24. 5. 2017 14:59:20 2420 Starting Starcraft completed
+24. 5. 2017 15:02:12 2420 Startbutton
+24. 5. 2017 15:02:12 2420 Starting Game Starcraft 1.16.1 C:\Games\Starcraft\StarCraft.exe
+24. 5. 2017 15:02:12 2420 BWAPI 4.1.2 Injector [RELEASE] Version  Compatible
+24. 5. 2017 15:02:12 2420 W-MODE 1.02 Version 1.0.2 Compatible
+24. 5. 2017 15:02:12 2420 Obtained DebugPrivilege
+24. 5. 2017 15:02:12 2420 CreateProcess
+24. 5. 2017 15:02:12 2420 Call ScSuspended for all active Plugins
+24. 5. 2017 15:02:12 2420 ApplyPatchSuspended for BWAPI 4.1.2 Injector [RELEASE]
+24. 5. 2017 15:02:15 2420 ApplyPatchSuspended for W-MODE 1.02
+24. 5. 2017 15:02:15 2420 ResumeThread
+24. 5. 2017 15:02:15 2420 WaitForInputIdle
+24. 5. 2017 15:02:15 2420 Call ScWindowCreated for all active Plugins
+24. 5. 2017 15:02:15 2420 ApplyPatch for BWAPI 4.1.2 Injector [RELEASE]
+24. 5. 2017 15:02:15 2420 ApplyPatch for W-MODE 1.02
+24. 5. 2017 15:02:15 2420 Starting Starcraft completed

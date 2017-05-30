@@ -1,11 +1,11 @@
 package MODaStar;
 
 import MapManager.PotentialField;
-import bwapi.*;
-import bwta.BWTA;
-import bwta.Polygon;
+import bwapi.Color;
+import bwapi.Game;
+import bwapi.Position;
+import bwapi.TilePosition;
 
-import java.awt.image.TileObserver;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;

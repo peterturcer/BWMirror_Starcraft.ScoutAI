@@ -240,13 +240,13 @@ public class UnitManager {
     }
 
     public void cameraLockOnSelected() {
-        if(scoutingUnits!=null) {
-            for(ScoutingUnit u: scoutingUnits) {
-                if(u.getUnit().isSelected()) {
-                    game.setScreenPosition(u.getUnit().getX()-200,u.getUnit().getY()-200);
-                }
-            }
-        }
+//        if(scoutingUnits!=null) {
+//            for(ScoutingUnit u: scoutingUnits) {
+//                if(u.getUnit().isSelected()) {
+//                    game.setScreenPosition(u.getUnit().getX()-200,u.getUnit().getY()-200);
+//                }
+//            }
+//        }
     }
 
 

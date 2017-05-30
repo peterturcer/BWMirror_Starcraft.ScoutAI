@@ -21,7 +21,7 @@ public class Bot extends DefaultBWListener {
 
     public Bot() {
         super();
-        mirror=new Mirror();
+        mirror = new Mirror();
     }
 
     public void run() {
@@ -42,13 +42,13 @@ public class Bot extends DefaultBWListener {
             System.out.println("BWTA scan complete !");
         */
 
-        scout=new Scout_module(game);
+        scout = new Scout_module(game);
         scout.onStart();
-        consoleHandler=new ConsoleHandler(scout);
-        qexecutor=new QExecutor(scout);
+        consoleHandler = new ConsoleHandler(scout);
+        qexecutor = new QExecutor(scout);
         qexecutor.initializeAll();
 
-        game.setLocalSpeed(15);
+        game.setLocalSpeed(4);
         game.enableFlag(1);
 
         System.out.println("ScoutAI bot working.");
@@ -66,6 +66,7 @@ public class Bot extends DefaultBWListener {
         qexecutor.onFrame();
         qexecutor.drawAll();
         qexecutor.showAll();
+
     }
 
     @Override
@@ -94,7 +95,7 @@ public class Bot extends DefaultBWListener {
         super.onUnitDiscover(unit);
 
         //ToDo - implement into unitManager manageAll()
-        scout.getUnitManager().manageDetection(unit,scout.getMapManager());
+        scout.getUnitManager().manageDetection(unit, scout.getMapManager());
     }
 
     @Override

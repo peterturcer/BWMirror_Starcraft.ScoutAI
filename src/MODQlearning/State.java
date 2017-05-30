@@ -49,4 +49,31 @@ public class State {
         return hashCode+"|"+hp+"|"+safePath_distance_ratio+"|"+normalPath_distance_ratio+"|"+riskPath_distance_ratio+"|"+safePath_danger_ratio+"|"+normalPath_danger_ratio+"|"+riskPath_danger_ratio;
     }
 
+    public int getHp() {
+        return hp;
+    }
+
+    public int getSafePath_distance_ratio() {
+        return safePath_distance_ratio;
+    }
+
+    public int getNormalPath_distance_ratio() {
+        return normalPath_distance_ratio;
+    }
+
+    public int getRiskPath_distance_ratio() {
+        return riskPath_distance_ratio;
+    }
+
+    public int getSafePath_danger_ratio() {
+        return safePath_danger_ratio;
+    }
+
+    public int getNormalPath_danger_ratio() {
+        return normalPath_danger_ratio;
+    }
+
+    public int getRiskPath_danger_ratio() {
+        return riskPath_danger_ratio;
+    }
 }

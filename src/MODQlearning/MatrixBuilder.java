@@ -38,9 +38,9 @@ public class MatrixBuilder {
             ar[i++] = result.removeFirst();
         }
 
-        for(State s:ar) {
+       /*for(State s:ar) {
             System.out.println("State = "+s.toString());
-        }
+        }*/
 
         return ar;
 

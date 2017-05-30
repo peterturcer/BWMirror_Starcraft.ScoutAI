@@ -6,9 +6,6 @@ import MODaStar.Block;
 import MODaStar.GridMap;
 import ScoutModule.Scout_module;
 import bwapi.*;
-import bwta.BWTA;
-import bwta.BaseLocation;
-import bwta.Chokepoint;
 
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
@@ -441,7 +438,7 @@ public class MapManager {
 
     /* ------------------- other methods ------------------- */
 
-    public int calculateDangerForPath(Unit scout, ArrayList<Block> path){
+   /* public int calculateDangerForPath(Unit scout, ArrayList<Block> path){
         int danger = 0;
         double scoutSpeed = unitSpeed(scout);
 
@@ -453,11 +450,45 @@ public class MapManager {
                 if (unit.getType().canAttack() && isRanged(unit)){
                     if(canUnitComeToABlock(block,unit, (int) (block.getDestination_distance()/scoutSpeed))){
                         danger += unit.getPlayer().damage(unit.getType().groundWeapon());
-                        // TODO increase complexity of the danger calculation
                     }
                 }
             }
         }
+        return danger;
+    }*/
+
+    public int calculateDangerForPath(Unit scout, ArrayList<Block> path){
+        int danger = 0;
+        double scoutSpeed = unitSpeed(scout);
+        int dangerPathSize = 10;
+        int blockCounter = 0;
+
+        if(path.size() < dangerPathSize)
+        {
+            for (Block block : path) {
+                danger += block.getDamage();
+                for (Unit unit : game.enemy().getUnits()) {
+                    if (unit.getType().canAttack() && isRanged(unit)){
+                        if(canUnitComeToABlock(block,unit, (int) (block.getDestination_distance()/scoutSpeed)))
+                        {
+                            danger += unit.getPlayer().damage(unit.getType().groundWeapon());
+                        }}}}
+        }
+          else
+        {
+            for (Block block : path) {
+
+                if(blockCounter > (path.size() - dangerPathSize))
+                {
+                danger += block.getDamage();
+                for (Unit unit : game.enemy().getUnits()) {
+                    if (unit.getType().canAttack() && isRanged(unit)){
+                        if(canUnitComeToABlock(block,unit, (int) (block.getDestination_distance()/scoutSpeed)))
+                        {
+                            danger += unit.getPlayer().damage(unit.getType().groundWeapon());
+                        }}}}
+                        blockCounter++;
+            }}
 
         return danger;
     }
@@ -476,7 +507,7 @@ public class MapManager {
     public boolean canUnitComeToABlock(Block block, Unit unit, int frames){
         double unitSpeed = unitSpeed(unit);
         double distance = distance(block.getPosition(),unit.getPosition());
-        double framesNeeded = distance / unitSpeed; // how many drames unit needs to travel the distance
+        double framesNeeded = distance / unitSpeed; // how many frames unit needs to travel the distance
         return framesNeeded <= frames; // if units needs more than
     }
 

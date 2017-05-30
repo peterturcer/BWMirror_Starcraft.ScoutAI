@@ -1,12 +1,12 @@
 package ScoutModule;
 
-import MODQlearning.QExecutor;
-import UnitManagement.*;
-import bwapi.*;
-import MapManager.*;
-import bwta.BWTA;
+import MapManager.MapManager;
+import UnitManagement.ActionManager;
+import UnitManagement.UnitManager;
+import bwapi.Game;
+import bwapi.Position;
+import bwapi.Unit;
 
-import java.util.Calendar;
 import java.util.Random;
 
 /**

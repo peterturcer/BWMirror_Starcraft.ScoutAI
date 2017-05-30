@@ -1,9 +1,11 @@
 package UnitManagement;
 
 import MODaStar.AStarPathCalculator;
-import ScoutModule.Scout_module;
-import bwapi.*;
-import MapManager.*;
+import MapManager.MapManager;
+import bwapi.Color;
+import bwapi.Game;
+import bwapi.Position;
+import bwapi.Unit;
 
 import java.util.LinkedList;
 import java.util.List;
